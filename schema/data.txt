@@ -1,0 +1,9 @@
+Ping 
+throughput curl
+throughput uploads
+throughput interface traffic
+throughput shaperprobe
+last mile rtt
+dns accuracy and time 
+
+

@@ -270,10 +270,12 @@ ALTER TABLE public.ip OWNER TO srikanth;
 -- Name: measurements; Type: TABLE; Schema: public; Owner: srikanth; Tablespace: 
 --
 
+CREATE VIEW measurements as select *, or(param="ping",param="dns") from ping p, dnsqueries d where p.id = d.id;
+
+
 CREATE TABLE measurements (
     id numeric(11,0) NOT NULL,
     deviceid character varying(15) DEFAULT NULL::character varying,
-    userid numeric(11,0) DEFAULT NULL::numeric,
     srcip numeric(20,0) DEFAULT NULL::numeric,
     dstip numeric(20,0) DEFAULT NULL::numeric,
     "timestamp" numeric(20,0) DEFAULT NULL::numeric,
@@ -288,7 +290,29 @@ CREATE TABLE measurements (
 );
 
 
+
 ALTER TABLE public.measurements OWNER TO srikanth;
+
+CREATE TABLE tools (
+       toolid integer not null,
+       tool_desc varchar(10)
+);
+
+CREATE TABLE pings (
+    id numeric(11,0) NOT NULL,
+    deviceid character varying(15) DEFAULT NULL::character varying,
+    srcip ipaddr NOT NULL,
+    dstip ipaddr NOT NULL,
+    "timestamp" numeric(20,0) DEFAULT NULL::numeric,
+    avg double precision,
+    std double precision,
+    min double precision,
+    max double precision,
+    med double precision,
+    iqr double precision,
+    toolid integer;
+);
+
 
 --
 -- Name: sla; Type: TABLE; Schema: public; Owner: srikanth; Tablespace: 
@@ -311,8 +335,8 @@ ALTER TABLE public.sla OWNER TO srikanth;
 
 CREATE TABLE traceroute_hops (
     tid numeric(11,0) DEFAULT NULL::numeric,
-    id numeric(11,0) DEFAULT NULL::numeric,
-    ip numeric(20,0) DEFAULT NULL::numeric,
+    hop_id numeric(11,0) DEFAULT NULL::numeric,
+    ip ipaddr DEFAULT NULL::numeric,
     rtt double precision
 );
 
@@ -326,11 +350,10 @@ ALTER TABLE public.traceroute_hops OWNER TO srikanth;
 CREATE TABLE traceroutes (
     id numeric(11,0) NOT NULL,
     deviceid character varying(15) DEFAULT NULL::character varying,
-    userid numeric(11,0) DEFAULT NULL::numeric,
-    srcip numeric(20,0) DEFAULT NULL::numeric,
-    dstip numeric(20,0) DEFAULT NULL::numeric,
+    srcip ipaddr DEFAULT NULL,
+    dstip ipaddr DEFAULT NULL,
     "timestamp" numeric(20,0) DEFAULT NULL::numeric,
-    hops numeric(20,0) DEFAULT NULL::numeric
+    hops integer(2) DEFAULT 0
 );
 
 
