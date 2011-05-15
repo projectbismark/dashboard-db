@@ -37,10 +37,16 @@ CREATE TABLE devices (
 
 CREATE TABLE users (
     userid id_t,
-    name character varying(100) DEFAULT NULL::character varying,
-    email character varying(30) DEFAULT NULL::character varying,
-    address character varying(300) DEFAULT NULL::character varying,
-    phone character varying(20) DEFAULT NULL::character varying,
+    name varchar(100) DEFAULT NULL,
+    email varchar(80) DEFAULT NULL,
+    street varchar(80) DEFAULT NULL,
+    city varchar(80) DEFAULT NULL,
+    state varchar(30) DEFAULT NULL,
+    postalcode varchar(30) DEFAULT NULL,
+    country varchar(2) DEFAULT NULL,
+    phone varchar(20) DEFAULT NULL,
+    skype varchar(80) DEFAULT NULL,
+    sip varchar(80) DEFAULT NULL,
     primary key (userid)
 );
 
