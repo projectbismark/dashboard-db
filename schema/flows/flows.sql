@@ -1,4 +1,4 @@
-\i defaults.sql
+\i defaults.cfg
 
 CREATE TABLE flows (
     uid numeric(20,0) NOT NULL,

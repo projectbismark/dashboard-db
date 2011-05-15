@@ -1,4 +1,4 @@
-\i defaults.sql
+\i defaults.cfg
 
 CREATE TABLE dhcp_logs (
     deviceid deviceid_t,

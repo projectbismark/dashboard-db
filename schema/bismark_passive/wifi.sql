@@ -1,4 +1,4 @@
-\i defaults.sql
+\i defaults.cfg
 
 CREATE TABLE wifi_assoc (
     stationmac macaddr,

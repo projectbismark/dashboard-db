@@ -1,4 +1,4 @@
-\i defaults.sql
+\i defaults.cfg
 CREATE INDEX arp_logs_macid ON arp_logs USING btree (macid);
 CREATE INDEX dhcp_logs_client ON dhcp_logs USING btree (client);
 CREATE INDEX dhcp_logs_event ON dhcp_logs USING btree (action);

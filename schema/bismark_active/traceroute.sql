@@ -1,4 +1,4 @@
-\i defaults.sql
+\i defaults.cfg
 
 -- this can't possibly work
 

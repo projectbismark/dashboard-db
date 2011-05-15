@@ -1,4 +1,4 @@
-\i defaults.sql
+\i defaults.cfg
 
 CREATE TABLE aggl3bitrate (like measurements_tmpl including defaults including constraints including indexes);
 CREATE TABLE bitrate (like measurements_tmpl including defaults including constraints including indexes);

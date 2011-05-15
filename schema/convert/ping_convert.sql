@@ -1,4 +1,4 @@
-\i ../defaults.sql
+\i ../defaults.cfg
 drop table t3; drop table t4; drop table t5; 
 create temp table t3 as select id, 
 				deviceid, 

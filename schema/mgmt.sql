@@ -1,10 +1,10 @@
-\i defaults.sql
+\i defaults.cfg
 
 CREATE TABLE tools (
        id id_t,
        tool varchar(10) not null,
        tool_desc varchar(80),
-       primary key(toolid)
+       primary key(id)
 );
 
 CREATE TABLE sla (

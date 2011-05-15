@@ -1,4 +1,4 @@
-\i defaults.sql
+\i defaults.cfg
 
 CREATE TABLE measurements_tmpl (
     deviceid deviceid_t,
