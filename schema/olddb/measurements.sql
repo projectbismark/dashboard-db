@@ -16,3 +16,22 @@ CREATE TABLE MEASUREMENTS (
   tool varchar(20) default NULL,
   PRIMARY KEY  (id)
 );
+
+CREATE TABLE measurements_old (
+    id numeric(11,0) NOT NULL,
+    deviceid character varying(15) DEFAULT NULL::character varying,
+    srcip numeric(20,0) DEFAULT NULL::numeric,
+    dstip numeric(20,0) DEFAULT NULL::numeric,
+    "timestamp" numeric(20,0) DEFAULT NULL::numeric,
+    param character varying(20) DEFAULT NULL::character varying,
+    avg double precision,
+    std double precision,
+    min double precision,
+    max double precision,
+    med double precision,
+    iqr double precision,
+    tool character varying(20) DEFAULT NULL::character varying
+);
+
+
+
