@@ -22,13 +22,13 @@ def devicesummary(request, device):
 
 def getISP(request,device):
     
-    userdevice = Userdevice.objects.filter(deviceid=device)
+    '''userdevice = Userdevice.objects.filter(deviceid=device)
 
     output=str(len(userdevice))
-    '''for row in userdevice:
+    for row in userdevice:
 	output+ = str(row.userid)    '''
-
-    return HttpResponse(output)
+	
+    return HttpResponse('comcast')
 
 def cvs_linegraph(request, device):
     '''    
