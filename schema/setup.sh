@@ -30,7 +30,7 @@ psql $DB -f /usr/share/postgresql/8.4/contrib/pgcrypto.sql
 # Similarly permissions and triggers
 
 TESTS=bismark_tests/*.sql
-FILES="types.sql functions.sql mgmt.sql compat.sql $TESTS constraints.sql triggers.sql permissions.sql views.sql mgmt_data.sql"
+FILES="types.sql functions.sql table_templates.sql mgmt.sql compat.sql $TESTS constraints.sql triggers.sql permissions.sql views.sql mgmt_data.sql"
 for i in $FILES
 do
 #cat defaults.sql $i | psql $DB
