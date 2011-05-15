@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3>BISMark Devices</h3>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+{% if device_list %}
+    <ul>
+	    <table border="1">
+    {% for device in device_list %}        
+	<tr>
+		<td><a href="/device/{{ device.deviceid }}/">{{ device.deviceid }}</a></td>
+		<td><div id="{{device.deviceid}}"> <script type="text/javascript">$.get('/getISP/{{device.deviceid}}', function(data){
+document.write("paps");
+}); </script> </div></td>
+	</tr>
+    {% endfor %}
+     </table> 
+    </ul>
+
+
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+<script type="text/javascript">
+
+	function getISp(deviceid)
+	{
+		$.get("test.php");
+	}
+	
+	
+
+
+</script>
+
+<script type="text/javascript" src="/static/swfobject.js"></script>
+    <script type="text/javascript">
+     swfobject.embedSWF(
+     "/static/open-flash-chart.swf", "chart_demo",
+     "820", "400", "9.0.0", "/static/expressInstall.swf",
+     {"data-file":"/data/"} );
+    </script>
+
+  <div class="chart" id="chart_demo"></div>
+
+{% endblock %}
+
+
+
