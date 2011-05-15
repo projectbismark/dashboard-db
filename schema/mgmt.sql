@@ -21,8 +21,9 @@ CREATE TABLE userdevice (
     deviceid deviceid_t,
     startdt eventstamp_t,
     enddt eventstamp_t,
-    id id_t unique,
+    id id_t,
     primary key(userid, deviceid),
+    unique(id)
 );
 
 CREATE TABLE devices (
@@ -48,8 +49,8 @@ CREATE TABLE usersla (
     slaid idref_t,
     startdt numeric(20,0) DEFAULT NULL::numeric,
     enddt numeric(20,0) DEFAULT NULL::numeric,
-    id id_t unique,
-    primary key(userid,slaid)
-
+    id id_t,
+    primary key(userid,slaid),
+    unique(id)
 );
 
