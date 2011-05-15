@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3>BISMark Devices</h3>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" src="/static/sorttable.js"></script>
+{% if device_list %}
+    <ul>
+	    <table border="1" class="sortable">
+	<tr>
+		<td>Device</td>
+		<td>ISP</td>
+		<td>Plan</td>
+		<td><div id='a' content='dds'>Location</div></td>
+	</tr>
+    {% for device in device_list %}        
+	<tr>
+		<td><a href="/device/{{ device.deviceid }}/">{{ device.deviceid }}</a></td>
+		<td><div id="{{device.deviceid}}" value="com"> <script type="text/javascript">$.get('/getISP/{{device.deviceid}}', function(data) {
+
+</script> </div></td>
+	</tr>
+    {% endfor %}
+     </table> 
+    </ul>
+
+
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+<style type="text/css">
+th, td {
+  padding: 3px !important;
+}
+
+/* Sortable tables */
+table.sortable thead {
+    background-color:#eee;
+    color:#666666;
+    font-weight: bold;
+    cursor: default;
+}
+</style>
+
+<script type="text/javascript" src="/static/swfobject.js"></script>
+    <script type="text/javascript">
+     swfobject.embedSWF(
+     "/static/open-flash-chart.swf", "chart_demo",
+     "820", "400", "9.0.0", "/static/expressInstall.swf",
+     {"data-file":"/data/"} );
+    </script>
+
+  <div class="chart" id="chart_demo"></div>
+
+{% endblock %}
+
+
+
