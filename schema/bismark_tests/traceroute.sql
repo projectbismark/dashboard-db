@@ -1,5 +1,7 @@
 \i defaults.sql
 
+-- this can't possibly work
+
 CREATE TABLE traceroute_hops (
     tid numeric(11,0) DEFAULT NULL::numeric,
     hop_id numeric(11,0) DEFAULT NULL::numeric,
@@ -8,7 +10,7 @@ CREATE TABLE traceroute_hops (
 );
 
 CREATE TABLE traceroutes (
-    id numeric(11,0) NOT NULL,
+    id id_t,
     deviceid deviceid_t,
     srcip inet DEFAULT NULL,
     dstip inet DEFAULT NULL,

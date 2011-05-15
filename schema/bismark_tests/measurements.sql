@@ -1,6 +1,6 @@
 \i defaults.sql
 
-CREATE TABLE pings (
+CREATE TABLE measurements_tmpl (
     deviceid deviceid_t,
     toolid integer,
     src inetn_t,

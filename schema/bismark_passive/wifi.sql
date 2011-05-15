@@ -7,7 +7,7 @@ CREATE TABLE wifi_assoc (
     power numeric(11,0) DEFAULT NULL::numeric,
     numpkts numeric(11,0) DEFAULT NULL::numeric,
     bssid bssid_t,
-    probedessid character varying(50) DEFAULT NULL::character varying,
+    probedessid essid_t,
     deviceid deviceid_t
 );
 
@@ -25,6 +25,6 @@ CREATE TABLE wifi_scan (
     numbeacons numeric(11,0) DEFAULT NULL::numeric,
     numiv numeric(11,0) DEFAULT NULL::numeric,
     idlen numeric(11,0) DEFAULT NULL::numeric,
-    essid character varying(50) DEFAULT NULL::character varying
+    essid essid_t
 );
 

@@ -3,10 +3,11 @@
 CREATE TABLE dhcp_logs (
     deviceid deviceid_t,
     eventstamp eventstamp_t,
-    action character varying(20) DEFAULT NULL::character varying NOT NULL,
+    action dhcp_action_t,
+character varying(20) DEFAULT NULL::character varying NOT NULL,
     ip inet,
     macid macaddr_t,
-    client character varying(50) DEFAULT NULL::character varying NOT NULL
+    client dnsname_t
 );
 
 CREATE TABLE event_logs (

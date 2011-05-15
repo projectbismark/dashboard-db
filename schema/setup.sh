@@ -3,6 +3,7 @@
 # You need:
 # pgplang
 # pgcrypto
+
 # geoip
 
 if [ "$1" != "" ]
@@ -13,7 +14,9 @@ fi
 # fixme, you need perms to create databases
 
 # createdb $DB
-# createlang plpgsql
+createlang plpgsql $DB
+psql $DB -f /usr/share/postgresql/8.4/contrib/pgcrypto.sql
+
 # create pgcrypto
 # create pggeoip
 
