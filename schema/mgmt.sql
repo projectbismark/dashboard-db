@@ -19,8 +19,8 @@ CREATE TABLE sla (
 CREATE TABLE userdevice (
     userid idref_t,
     deviceid deviceid_t,
-    startdt timestamp,
-    enddt timestamp
+    startdt eventstamp_t,
+    enddt eventstamp_t
 );
 
 CREATE TABLE devices (
@@ -28,7 +28,8 @@ CREATE TABLE devices (
     macid macaddr_t,
     device_type device_type_t,
     os osname_t,
-    version version_t
+    version version_t,
+    primary key(deviceid)
 );
 
 CREATE TABLE users (

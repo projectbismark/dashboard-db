@@ -1,1 +1,2 @@
-insert into tools values (1,"PING","The busybox ping tool");
+\i defaults.cfg
+insert into tools values (sha1('PING'),'PING','The busybox ping tool');
