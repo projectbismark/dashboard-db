@@ -15,32 +15,14 @@ ALTER TABLE ONLY event_logs
 ALTER TABLE ONLY events
     ADD CONSTRAINT events_pkey PRIMARY KEY (eventid);
 
-ALTER TABLE ONLY flows_17jul_26oct_2010
-    ADD CONSTRAINT flows_17jul_26oct_2010_flowid_key UNIQUE (flowid, deviceid, tsstart);
-
-ALTER TABLE ONLY flows
-    ADD CONSTRAINT flows_flowid_key UNIQUE (flowid, deviceid, tsstart);
-
 ALTER TABLE ONLY flows_newformat
     ADD CONSTRAINT flows_newformat_flowid_key UNIQUE (flowid, deviceid, tsstart);
-
 
 ALTER TABLE ONLY flows_newformat
     ADD CONSTRAINT flows_newformat_pkey PRIMARY KEY (uid);
 
-
-ALTER TABLE ONLY flows
-    ADD CONSTRAINT flows_pkey PRIMARY KEY (uid);
-
-ALTER TABLE ONLY flows_samples_17jul_26oct_2010
-    ADD CONSTRAINT flows_samples_17jul_26oct_2010_pkey PRIMARY KEY (uid, tsend);
-
 ALTER TABLE ONLY flows_samples_newformat
     ADD CONSTRAINT flows_samples_newformat_pkey PRIMARY KEY (uid, tsend);
-
-ALTER TABLE ONLY flows_samples
-    ADD CONSTRAINT flows_samples_uid_key UNIQUE (uid, tsend);
-
 
 ALTER TABLE ONLY measurements
     ADD CONSTRAINT measurements_deviceid_key UNIQUE (deviceid, srcip, eventstamp, param);
