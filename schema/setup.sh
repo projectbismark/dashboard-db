@@ -15,7 +15,7 @@ CONTRIBDIR=/usr/share/postgresql/8.4/contrib
 # createdb $DB
 # pg_buffercache.sql
 # postgis (for geoip)
-
+psql $DB -f init.sql
 createlang plpgsql $DB
 psql $DB -f $CONTRIBDIR/pgcrypto.sql
 psql $DB -f $CONTRIBDIR/pg_buffercache.sql
@@ -30,7 +30,7 @@ psql $DB -f $CONTRIBDIR/pg_buffercache.sql
 # Similarly permissions and triggers
 
 TESTS="bismark_active/*.sql bismark_passive/*.sql"
-FILES="init.sql types.sql functions.sql table_templates.sql mgmt.sql compat.sql $TESTS constraints.sql triggers.sql permissions.sql views.sql mgmt_data.sql"
+FILES="types.sql functions.sql table_templates.sql mgmt.sql compat.sql $TESTS constraints.sql triggers.sql permissions.sql views.sql mgmt_data.sql"
 for i in $FILES
 do
 #cat defaults.sql $i | psql $DB

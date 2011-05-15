@@ -1,3 +1,4 @@
-drop schema capetown cascade;
-create schema capetown;
+drop schema public cascade;
+create schema public;
+
 
