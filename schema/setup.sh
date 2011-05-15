@@ -26,10 +26,11 @@ fi
 # (it also helps to have no indexes during imports)
 # Similarly permissions and triggers
 
-TESTS=tests/*.sql
+TESTS=bismark_tests/*.sql
 FILES="types.sql functions.sql mgmt.sql compat.sql $TESTS constraints.sql triggers.sql permissions.sql views.sql"
 for i in $FILES
 do
+#cat defaults.sql $i | psql $DB
 psql -f $i $DB
 done
 

@@ -1,5 +1,4 @@
-\i ../defaults.sql
-DROP TABLE pings;
+\i defaults.sql
 
 CREATE TABLE pings (
     deviceid deviceid_t,

@@ -1,5 +1,4 @@
-\i ../defaults.sql
-drop table dhcp_logs;
+\i defaults.sql
 
 CREATE TABLE dhcp_logs (
     deviceid deviceid_t,
@@ -10,15 +9,11 @@ CREATE TABLE dhcp_logs (
     client character varying(50) DEFAULT NULL::character varying NOT NULL
 );
 
-drop table event_logs;
-
 CREATE TABLE event_logs (
     deviceid deviceid_t,
     eventstamp eventstamp_t,
     eventid eventid_t
 );
-
-drop table events;
 
 CREATE TABLE events (
     eventid eventid_t,

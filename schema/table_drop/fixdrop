@@ -1,0 +1,13 @@
+#!/bin/sh
+
+#FIXME, need to drop these in reverse order
+
+grep -i create table ../bismark_tests/*.sql | sed s/CREATE/DROP/i |
+	while read x y z 
+	do 
+	b=`echo $x | cut -f1 -d:`
+	f=`basename $b`
+	t=`echo $z | awk '{print $1}'`
+	echo drop table $t \; >> $f
+done
+	

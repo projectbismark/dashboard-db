@@ -1,5 +1,4 @@
-\i ../defaults.sql
-drop table arp_logs;
+\i defaults.sql
 
 CREATE TABLE arp_logs (
     deviceid deviceid_t,
@@ -7,8 +6,6 @@ CREATE TABLE arp_logs (
     macid macaddr_t,
     ip inet
 );
-
-drop table ip;
 
 CREATE TABLE ip (
     cip cidr,

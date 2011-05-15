@@ -1,5 +1,4 @@
-\i ../defaults.sql
-drop table flows;
+\i defaults.sql
 
 CREATE TABLE flows (
     uid numeric(20,0) NOT NULL,
@@ -19,8 +18,6 @@ CREATE TABLE flows (
     appid smallint NOT NULL
 );
 
-drop table flows_newformat;
-
 CREATE TABLE flows_newformat (
     uid numeric(20,0) NOT NULL,
     flowid numeric(20,0) NOT NULL,
@@ -39,8 +36,6 @@ CREATE TABLE flows_newformat (
     appid smallint NOT NULL,
     subid smallint NOT NULL
 );
-
-drop table flows_samples;
 
 CREATE TABLE flows_samples (
     uid numeric(11,0) NOT NULL,

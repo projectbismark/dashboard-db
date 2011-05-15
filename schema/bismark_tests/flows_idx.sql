@@ -1,2 +1,2 @@
-\i ../defaults.sql
+\i defaults.sql
 

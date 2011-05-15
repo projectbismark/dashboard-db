@@ -1,5 +1,4 @@
-\i ../defaults.sql
-drop table traceroute_hops;
+\i defaults.sql
 
 CREATE TABLE traceroute_hops (
     tid numeric(11,0) DEFAULT NULL::numeric,
@@ -7,8 +6,6 @@ CREATE TABLE traceroute_hops (
     ip inet,
     rtt double precision
 );
-
-drop table traceroutes;
 
 CREATE TABLE traceroutes (
     id numeric(11,0) NOT NULL,

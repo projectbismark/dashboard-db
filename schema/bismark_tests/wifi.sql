@@ -1,5 +1,4 @@
-\i ../defaults.sql
-drop table wifi_assoc;
+\i defaults.sql
 
 CREATE TABLE wifi_assoc (
     stationmac macaddr,
@@ -7,12 +6,10 @@ CREATE TABLE wifi_assoc (
     lastseen numeric(20,0) DEFAULT NULL::numeric,
     power numeric(11,0) DEFAULT NULL::numeric,
     numpkts numeric(11,0) DEFAULT NULL::numeric,
-    bssid bssid_t;
+    bssid bssid_t,
     probedessid character varying(50) DEFAULT NULL::character varying,
     deviceid deviceid_t
 );
-
-drop table wifi_scan;
 
 CREATE TABLE wifi_scan (
     deviceid deviceid_t,
