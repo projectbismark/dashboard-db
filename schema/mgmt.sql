@@ -5,15 +5,16 @@ CREATE TABLE tools (
 );
 
 CREATE TABLE sla (
-    slaid numeric(11,0) NOT NULL,
+    id id_t,
     isp character varying(30) DEFAULT NULL::character varying,
     sla character varying(50) DEFAULT NULL::character varying,
-    dl numeric(11,0) DEFAULT NULL::numeric,
-    ul numeric(11,0) DEFAULT NULL::numeric
+    dl bigint DEFAULT NULL::numeric,
+    ul bigint DEFAULT NULL::numeric,
+    primary key(id)
 );
 
 CREATE TABLE userdevice (
-    userid numeric(11,0) DEFAULT NULL::numeric,
+    userid idref_t,
     deviceid deviceid_t,
     startdt timestamp,
     enddt timestamp
@@ -28,16 +29,17 @@ CREATE TABLE devices (
 );
 
 CREATE TABLE users (
-    userid numeric(11,0) NOT NULL,
+    userid id_t,
     name character varying(100) DEFAULT NULL::character varying,
     email character varying(30) DEFAULT NULL::character varying,
     address character varying(300) DEFAULT NULL::character varying,
-    phone character varying(20) DEFAULT NULL::character varying
+    phone character varying(20) DEFAULT NULL::character varying,
+    primary key (userid)
 );
 
 CREATE TABLE usersla (
-    userid numeric(11,0) DEFAULT NULL::numeric,
-    slaid numeric(11,0) DEFAULT NULL::numeric,
+    userid idref_t,
+    slaid idref_t,
     startdt numeric(20,0) DEFAULT NULL::numeric,
     enddt numeric(20,0) DEFAULT NULL::numeric
 );

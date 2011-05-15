@@ -1,6 +1,6 @@
 FILES:=$(shell ls *.sql tests/*.sql)
 
-all: 
+all: psql -f 
 
 tables:
 

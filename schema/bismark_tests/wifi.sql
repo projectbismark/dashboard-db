@@ -1,12 +1,12 @@
 drop table wifi_assoc;
 
 CREATE TABLE wifi_assoc (
-    stationmac character varying(20) DEFAULT NULL::character varying,
+    stationmac macaddr,
     firstseen numeric(20,0) DEFAULT NULL::numeric,
     lastseen numeric(20,0) DEFAULT NULL::numeric,
     power numeric(11,0) DEFAULT NULL::numeric,
     numpkts numeric(11,0) DEFAULT NULL::numeric,
-    bssid character varying(20) DEFAULT NULL::character varying,
+    bssid bssid_t;
     probedessid character varying(50) DEFAULT NULL::character varying,
     deviceid deviceid_t
 );
@@ -15,10 +15,10 @@ drop table wifi_scan;
 
 CREATE TABLE wifi_scan (
     deviceid deviceid_t,
-    bssid character varying(20) DEFAULT NULL::character varying,
+    bssid bssid_t,
     firstseen numeric(20,0) DEFAULT NULL::numeric,
     lastseen numeric(20,0) DEFAULT NULL::numeric,
-    channel numeric(11,0) DEFAULT NULL::numeric,
+    channel smallint, 
     speed numeric(11,0) DEFAULT NULL::numeric,
     privacy character varying(50) DEFAULT NULL::character varying,
     cipher character varying(50) DEFAULT NULL::character varying,
