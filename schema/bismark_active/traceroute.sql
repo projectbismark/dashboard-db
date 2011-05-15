@@ -15,6 +15,7 @@ CREATE TABLE traceroutes (
     dstip inet DEFAULT NULL,
     eventstamp eventstamp_t,
     hops integer DEFAULT 0,
+    id id_t,
     primary key(id)
 );
 

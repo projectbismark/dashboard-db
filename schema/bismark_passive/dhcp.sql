@@ -17,7 +17,7 @@ CREATE TABLE event_logs (
     eventstamp eventstamp_t,
     eventid eventid_t,
     id id_t,
-    primary key (eventstamp,deviceid,eventid)
+    primary key (eventstamp,deviceid,eventid),
     unique(id)
 );
 
