@@ -1,3 +1,4 @@
+drop table flows;
 
 CREATE TABLE flows (
     uid numeric(20,0) NOT NULL,
@@ -16,6 +17,8 @@ CREATE TABLE flows (
     tsend numeric(17,6) NOT NULL,
     appid smallint NOT NULL
 );
+
+drop table flows_newformat;
 
 CREATE TABLE flows_newformat (
     uid numeric(20,0) NOT NULL,
@@ -36,6 +39,8 @@ CREATE TABLE flows_newformat (
     subid smallint NOT NULL
 );
 
+drop table flows_samples;
+
 CREATE TABLE flows_samples (
     uid numeric(11,0) NOT NULL,
     uppkts numeric(11,0) NOT NULL,
@@ -45,6 +50,9 @@ CREATE TABLE flows_samples (
     tsstart numeric(17,6) NOT NULL,
     tsend numeric(17,6) NOT NULL
 );
+
+drop table flows_samples_newformat;
+
 CREATE TABLE flows_samples_newformat (
     uid numeric(11,0) NOT NULL,
     uppkts numeric(11,0) NOT NULL,

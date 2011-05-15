@@ -1,3 +1,4 @@
+drop table arp_logs;
 
 CREATE TABLE arp_logs (
     deviceid deviceid_t,
@@ -5,6 +6,8 @@ CREATE TABLE arp_logs (
     macid macaddr_t,
     ip inet
 );
+
+drop table ip;
 
 CREATE TABLE ip (
     cip cidr,

@@ -1,3 +1,5 @@
+DROP TABLE pings;
+
 CREATE TABLE pings (
     deviceid deviceid_t,
     toolid integer,

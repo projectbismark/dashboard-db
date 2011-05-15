@@ -1,3 +1,4 @@
+
 CREATE TABLE tools (
        toolid integer not null,
        tool_desc varchar(80)

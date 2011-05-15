@@ -1,3 +1,5 @@
+drop table wifi_assoc;
+
 CREATE TABLE wifi_assoc (
     stationmac character varying(20) DEFAULT NULL::character varying,
     firstseen numeric(20,0) DEFAULT NULL::numeric,
@@ -8,6 +10,8 @@ CREATE TABLE wifi_assoc (
     probedessid character varying(50) DEFAULT NULL::character varying,
     deviceid deviceid_t
 );
+
+drop table wifi_scan;
 
 CREATE TABLE wifi_scan (
     deviceid deviceid_t,
