@@ -27,7 +27,7 @@ fi
 # Similarly permissions and triggers
 
 TESTS=bismark_tests/*.sql
-FILES="types.sql functions.sql mgmt.sql compat.sql $TESTS constraints.sql triggers.sql permissions.sql views.sql"
+FILES="types.sql functions.sql mgmt.sql compat.sql $TESTS constraints.sql triggers.sql permissions.sql views.sql mgmt_data.sql"
 for i in $FILES
 do
 #cat defaults.sql $i | psql $DB

@@ -1,8 +1,10 @@
 \i defaults.sql
 
 CREATE TABLE tools (
-       toolid integer not null,
-       tool_desc varchar(80)
+       id id_t,
+       tool varchar(10) not null,
+       tool_desc varchar(80),
+       primary key(toolid)
 );
 
 CREATE TABLE sla (
