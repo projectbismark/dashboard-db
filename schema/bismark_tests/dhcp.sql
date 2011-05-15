@@ -1,3 +1,4 @@
+\i ../defaults.sql
 drop table dhcp_logs;
 
 CREATE TABLE dhcp_logs (

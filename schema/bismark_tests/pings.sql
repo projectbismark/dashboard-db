@@ -1,3 +1,4 @@
+\i ../defaults.sql
 DROP TABLE pings;
 
 CREATE TABLE pings (

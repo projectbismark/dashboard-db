@@ -1,3 +1,4 @@
+\i ../defaults.sql
 drop table arp_logs;
 
 CREATE TABLE arp_logs (

@@ -1,3 +1,4 @@
+\i ../defaults.sql
 DROP TABLE rtt;
 
 CREATE TABLE rtt (

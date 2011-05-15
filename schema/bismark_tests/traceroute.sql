@@ -1,3 +1,4 @@
+\i ../defaults.sql
 drop table traceroute_hops;
 
 CREATE TABLE traceroute_hops (

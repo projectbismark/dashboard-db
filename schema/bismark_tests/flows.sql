@@ -1,3 +1,4 @@
+\i ../defaults.sql
 drop table flows;
 
 CREATE TABLE flows (

@@ -1,3 +1,4 @@
+\i defaults.sql
 create domain deviceid_t as macaddr not null;
 create domain eventstamp_t as numeric(20,0) DEFAULT NULL::numeric NOT NULL;
 create domain macaddr_t as macaddr;

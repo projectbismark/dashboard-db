@@ -1,3 +1,5 @@
+\i defaults.sql
+
 ALTER TABLE ONLY arp_logs
     ADD CONSTRAINT arp_logs_pkey PRIMARY KEY (deviceid, eventstamp, macid, ip);
 

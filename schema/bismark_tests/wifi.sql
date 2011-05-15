@@ -1,3 +1,4 @@
+\i ../defaults.sql
 drop table wifi_assoc;
 
 CREATE TABLE wifi_assoc (

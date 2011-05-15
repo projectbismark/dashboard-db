@@ -1,3 +1,4 @@
+\i defaults.sql
 
 CREATE TABLE tools (
        toolid integer not null,
