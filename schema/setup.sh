@@ -5,7 +5,7 @@
 # pgcrypto
 # geoip
 
-if [ "$1" -ne "" ]
+if [ "$1" != "" ]
 then
 DB="--dbname $1"
 fi
