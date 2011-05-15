@@ -10,7 +10,6 @@ CREATE TABLE traceroute_hops (
 );
 
 CREATE TABLE traceroutes (
-    id id_t,
     deviceid deviceid_t,
     srcip inet DEFAULT NULL,
     dstip inet DEFAULT NULL,

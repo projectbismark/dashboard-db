@@ -12,6 +12,6 @@ CREATE TABLE measurements_tmpl (
     maximum float8,
     median float8,
     iqr float8,
-    id id_t,
+    id id_t unique,
     primary key (deviceid, eventstamp, dst, src) -- dst,src maybe not needed
 );
