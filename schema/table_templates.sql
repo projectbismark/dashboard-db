@@ -34,7 +34,7 @@ CREATE OR REPLACE function gen_id_measurement_update() returns trigger as $gen_i
 	  new.id = sha1( new.deviceid || new.eventstamp || 
 	  	   	 new.dst || new.src));
 	  END IF;
-       return NULL;
+       return NEW;
        END;
 $gen_id_measurement_update$
 language plpgsql strict immutable;
@@ -46,7 +46,7 @@ CREATE OR REPLACE function gen_id_measurement_insert() returns trigger as $gen_i
 	  new.id = sha1( new.deviceid || new.eventstamp || 
 	  	   	 new.dst || new.src));
 	  END IF;
-       return NULL;
+       return NEW;
        END;
 $gen_id_measurement_insert$
 language plpgsql strict immutable;

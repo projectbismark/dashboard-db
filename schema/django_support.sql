@@ -16,7 +16,7 @@ CREATE OR REPLACE function gen_id_userdevice_update() returns trigger as $gen_id
 	  THEN
 	  new.id = sha1(new.userid || new.deviceid || new.testseries));
 	  END IF;
-       return NULL;
+       return NEW;
        END;
 $gen_id_userdevice_update$
 language plpgsql strict immutable;
@@ -58,7 +58,7 @@ CREATE OR REPLACE function gen_id_users_update() returns trigger as $gen_id_user
 	  THEN
 	  new.id = sha1(new.email || new.name);
 	  END IF;
-       return NULL;
+       return NEW;
        END;
 $gen_id_users_update$
 language plpgsql strict immutable;
@@ -70,7 +70,7 @@ CREATE OR REPLACE function gen_id_users_insert() returns trigger as $gen_id_user
 	  THEN
 	  new.id = sha1(new.email || new.name);
 	  END IF;
-	  RETURN NULL;
+	  RETURN NEW;
        END;
 $gen_id_users_insert$
 language plpgsql strict immutable;
