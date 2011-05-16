@@ -45,7 +45,7 @@ CREATE TABLE devices (
 );
 
 CREATE TABLE users (
-    userid id_t,
+    id id_t,
     name varchar(100) NOT NULL,
     email varchar(80) NOT NULL,
     street varchar(80) DEFAULT NULL,
@@ -56,7 +56,7 @@ CREATE TABLE users (
     phone varchar(20) DEFAULT NULL,
     skype varchar(80) DEFAULT NULL,
     sip varchar(80) DEFAULT NULL,
-    primary key (userid)
+    primary key (id)
 );
 
 CREATE TABLE usersla (

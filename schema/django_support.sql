@@ -88,7 +88,7 @@ CREATE OR REPLACE function gen_id_users_insert() returns trigger as $gen_id_user
        BEGIN
        IF (NOT(new.name IS NULL OR new.email IS NULL))
 	  THEN
-	  new.id = sha1(concat(new.email,new.name));
+	  new.id = sha1(new.email || new.name);
 	  END IF;
        return NULL;
        END;
