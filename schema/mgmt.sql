@@ -39,8 +39,8 @@ create trigger gen_id_tools_insert before insert on tools
 
 CREATE TABLE sla (
     id id_t,
-    isp varchar(30) DEFAULT NOT NULL,
-    sla varchar(30) DEFAULT NOT NULL, 
+    isp varchar(30) NOT NULL,
+    sla varchar(30) NOT NULL, 
     dl bigint DEFAULT 0,
     ul bigint DEFAULT 0,
     primary key(id)

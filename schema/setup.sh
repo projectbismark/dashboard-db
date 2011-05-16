@@ -29,11 +29,14 @@ psql $DB -f $CONTRIBDIR/pg_buffercache.sql
 # (it also helps to have no indexes during imports)
 # Similarly permissions and triggers
 
-TESTS="bismark_active/*.sql bismark_passive/*.sql"
+bismark_active/gen_capetown.sh
+
+TESTS="bismark_active/*.sql bismark_active/triggers/*.sql \
+	*.gsql \
+	bismark_passive/*.sql bismark_passive/triggers/*.sql"
 FILES="types.sql functions.sql mgmt.sql table_templates.sql compat.sql $TESTS constraints.sql triggers.sql permissions.sql views.sql django_support.sql mgmt_data.sql"
 for i in $FILES
 do
-#cat defaults.sql $i | psql $DB
 psql -f $i $DB
 done
 
