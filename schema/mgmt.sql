@@ -12,7 +12,7 @@ CREATE TABLE sla (
     isp varchar(30) DEFAULT NULL,
     sla varchar(30) DEFAULT NULL, 
     dl bigint DEFAULT 0,
-    ul bigint DEFAULT 0
+    ul bigint DEFAULT 0,
     primary key(id)
 );
 
