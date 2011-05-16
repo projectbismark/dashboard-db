@@ -1,11 +1,41 @@
 \i defaults.cfg
 
 CREATE TABLE tools (
-       toolid serial,
+       id toolid_t,
        tool varchar(10) not null,
+       version varchar(10) not null,
        tool_desc varchar(80),
-       primary key(toolid)
+       primary key(id)
 );
+
+CREATE OR REPLACE function gen_id_tools_update() returns trigger as $gen_id_tools_update$
+       BEGIN
+       IF (new.tool !=
+       	   old.tool OR 
+       	   new.version !=
+	   old.version)
+	  THEN
+	  new.id = sha1( new.tool || new.version );
+	  END IF;
+       return NEW;
+       END;
+$gen_id_tools_update$
+language plpgsql strict immutable;
+
+
+CREATE OR REPLACE function gen_id_tools_insert() returns trigger as $gen_id_tools_insert$
+       BEGIN
+	  new.id = sha1( new.tool || new.version );
+       return NEW;
+       END;
+$gen_id_tools_insert$
+language plpgsql strict immutable;
+
+create trigger gen_id_tools_update before update on tools
+	for each row execute procedure gen_id_tools_update();
+
+create trigger gen_id_tools_insert before insert on tools
+	for each row execute procedure gen_id_tools_insert();
 
 CREATE TABLE sla (
     id id_t,
@@ -24,7 +54,7 @@ CREATE TABLE testseries (
     unique(id)
 );
 
-CREATE TABLE userdevice (
+CREATE TABLE userdevices (
     userid idref_t,
     deviceid deviceid_t,
     startdt eventstamp_t,

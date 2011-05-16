@@ -1,8 +1,10 @@
 \i defaults.cfg
 
+-- deviceidref references userdevices(deviceid), but not unique across series
+
 CREATE TABLE measurements_tmpl (
-    deviceid deviceid_t,
-    toolid integer,
+    deviceid deviceidref_t, 
+    toolid toolidref_t references tools(id),
     src inetn_t,
     dst inetn_t,
     eventstamp eventstamp_t,
@@ -17,7 +19,7 @@ CREATE TABLE measurements_tmpl (
     primary key (deviceid, eventstamp, dst, src) -- dst,src maybe not needed
 );
 
--- ALTERTABLE COLUMN SET STORAGE external for the !@#!@ ids
+-- ALTER TABLE COLUMN SET STORAGE external for the !@#!@ useless ids
 -- FIXME, new is always new? do I need to grab the value of old?
 
 CREATE OR REPLACE function gen_id_measurement_update() returns trigger as $gen_id_measurement_update$

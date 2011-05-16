@@ -5,27 +5,35 @@
 -- TG_SCHEMA_NAME
 -- TG_TRIGGER
 
-drop trigger if exists gen_id_userdevice_insert on users cascade;
-drop trigger if exists gen_id_userdevice_update on users cascade;
+drop trigger if exists gen_id_userdevices_insert on userdevices cascade;
+drop trigger if exists gen_id_userdevices_update on userdevices cascade;
 
-CREATE OR REPLACE function gen_id_userdevice_update() returns trigger as $gen_id_userdevice_update$
+CREATE OR REPLACE function gen_id_userdevices_update() returns trigger as $gen_id_userdevices_update$
        BEGIN
        IF (new.userid != old.userid OR 
        	  new.deviceid != old.deviceid OR 
 	  new.testseries != old.testseries)
 	  THEN
-	  new.id = sha1(new.userid || new.deviceid || new.testseries));
+	  new.id = sha1(new.userid || new.deviceid || new.testseries);
 	  END IF;
        return NEW;
        END;
-$gen_id_userdevice_update$
+$gen_id_userdevices_update$
 language plpgsql strict immutable;
 
-create trigger gen_id_userdevice_update before update on userdevice
-	for each row execute procedure gen_id_userdevice_update();
+CREATE OR REPLACE function gen_id_userdevices_insert() returns trigger as $gen_id_userdevices_update$
+       BEGIN
+	  new.id = sha1(new.userid || new.deviceid || new.testseries);
+       return NEW;
+       END;
+$gen_id_userdevices_update$
+language plpgsql strict immutable;
 
-create trigger gen_id_userdevice_insert before insert on userdevice
-	for each row execute procedure gen_id_userdevice_insert();
+create trigger gen_id_userdevices_update before update on userdevices
+	for each row execute procedure gen_id_userdevices_update();
+
+create trigger gen_id_userdevice_insert before insert on userdevices
+	for each row execute procedure gen_id_userdevices_insert();
 
 -- CREATE OR REPLACE function gen_id_measurement() returns trigger as $gen_id_measurement$
 --        BEGIN

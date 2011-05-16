@@ -1,5 +1,6 @@
 \i defaults.cfg
 create domain deviceid_t as macaddr not null;
+create domain deviceidref_t as macaddr;
 create domain eventstamp_t as numeric(20,0) DEFAULT NULL::numeric NOT NULL;
 create domain macaddr_t as macaddr;
 create domain osname_t as varchar(10) DEFAULT NULL::varchar;
@@ -25,8 +26,11 @@ create domain dhcp_action_t varchar(20) DEFAULT NULL::character varying NOT NULL
 create domain sha1_t as bytea; --  check(length(VALUE) = 20);
 create domain sha1ref_t as bytea;
 
-create domain id_t as sha1_t; -- NOT NULL -- with trigger needed to generate
+create domain id_t as sha1_t; -- NOT NULL; -- with trigger needed to generate
 create domain idref_t as sha1ref_t; 
+
+create domain toolid_t as sha1_t; -- NOT NULL; -- with trigger needed to generate
+create domain toolidref_t as sha1ref_t; 
 
 create domain testseries_t as sha1_t NOT NULL; -- with trigger needed to generate
 create domain testseriesref_t as sha1ref_t; 
