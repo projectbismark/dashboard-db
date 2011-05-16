@@ -25,7 +25,7 @@ create domain dhcp_action_t varchar(20) DEFAULT NULL::character varying NOT NULL
 create domain sha1_t as bytea check(length(VALUE) = 20);
 create domain sha1ref_t as bytea;
 
-create domain id_t as sha1_t NOT NULL; -- with trigger needed to generate
+create domain id_t as sha1_t; -- NOT NULL -- with trigger needed to generate
 create domain idref_t as sha1ref_t; 
 
 create domain testseries_t as sha1_t NOT NULL; -- with trigger needed to generate

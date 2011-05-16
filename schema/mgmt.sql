@@ -46,8 +46,8 @@ CREATE TABLE devices (
 
 CREATE TABLE users (
     userid id_t,
-    name varchar(100) DEFAULT NULL,
-    email varchar(80) DEFAULT NULL,
+    name varchar(100) NOT NULL,
+    email varchar(80) NOT NULL,
     street varchar(80) DEFAULT NULL,
     city varchar(80) DEFAULT NULL,
     state varchar(30) DEFAULT NULL,

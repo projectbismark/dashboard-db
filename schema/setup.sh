@@ -30,7 +30,7 @@ psql $DB -f $CONTRIBDIR/pg_buffercache.sql
 # Similarly permissions and triggers
 
 TESTS="bismark_active/*.sql bismark_passive/*.sql"
-FILES="types.sql functions.sql table_templates.sql mgmt.sql compat.sql $TESTS constraints.sql triggers.sql permissions.sql views.sql mgmt_data.sql"
+FILES="types.sql functions.sql table_templates.sql mgmt.sql compat.sql $TESTS constraints.sql triggers.sql permissions.sql views.sql django_support.sql mgmt_data.sql"
 for i in $FILES
 do
 #cat defaults.sql $i | psql $DB
