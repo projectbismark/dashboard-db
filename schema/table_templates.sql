@@ -3,8 +3,7 @@
 -- deviceidref references userdevices(deviceid), but not unique across series
 
 CREATE TABLE measurements_tmpl (
-    deviceid deviceidref_t, 
-    toolid toolidref_t references tools(id),
+    deviceid deviceidref_t NOT NULL, 
     src inetn_t,
     dst inetn_t,
     eventstamp eventstamp_t,
@@ -15,11 +14,14 @@ CREATE TABLE measurements_tmpl (
     median float8,
     iqr float8,
     id id_t,
+    toolid toolidref_t references tools(id),
     unique(id),
     primary key (deviceid, eventstamp, dst, src) -- dst,src maybe not needed
 );
 
--- ALTER TABLE COLUMN SET STORAGE external for the !@#!@ useless ids
+alter TABLE measurements_tmpl ALTER COLUMN toolid set storage EXTERNAL;
+alter TABLE measurements_tmpl ALTER COLUMN id set storage EXTERNAL;
+
 -- FIXME, new is always new? do I need to grab the value of old?
 
 CREATE OR REPLACE function gen_id_measurement_update() returns trigger as $gen_id_measurement_update$

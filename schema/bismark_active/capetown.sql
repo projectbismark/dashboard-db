@@ -31,5 +31,7 @@ create trigger gen_id_dnsfailnc_insert before insert on dnsfailnc
 	for each row execute procedure gen_id_measurement_insert();
 
 -- And we should alter storage to being external for the !@#!@ ids
+-- but premature optimization is the root of all evil. Test.
 
-alter table dnsfailnc alter column id set storage external; 
+alter TABLE dnsfailnc ALTER COLUMN toolid set storage EXTERNAL;
+alter TABLE dnsfailnc ALTER COLUMN id set storage EXTERNAL;
