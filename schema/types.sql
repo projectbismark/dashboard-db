@@ -28,6 +28,9 @@ create domain sha1ref_t as bytea;
 create domain id_t as sha1_t NOT NULL; -- with trigger needed to generate
 create domain idref_t as sha1ref_t; 
 
+create domain testseries_t as sha1_t NOT NULL; -- with trigger needed to generate
+create domain testseriesref_t as sha1ref_t; 
+
 -- This is old syntax and I can't remember the new syntax
 -- CREATE DOMAIN us_postal_code AS TEXT
 -- CHECK(

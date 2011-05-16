@@ -1,19 +1,27 @@
 \i defaults.cfg
 
 CREATE TABLE tools (
-       id id_t,
+       toolid serial,
        tool varchar(10) not null,
        tool_desc varchar(80),
-       primary key(id)
+       primary key(toolid)
 );
 
 CREATE TABLE sla (
     id id_t,
-    isp character varying(30) DEFAULT NULL::character varying,
-    sla character varying(50) DEFAULT NULL::character varying,
-    dl bigint DEFAULT NULL::numeric,
-    ul bigint DEFAULT NULL::numeric,
+    isp varchar(30) DEFAULT NULL,
+    sla varchar(30) DEFAULT NULL, 
+    dl bigint DEFAULT 0,
+    ul bigint DEFAULT 0
     primary key(id)
+);
+
+CREATE TABLE testseries (
+    id testseries_t,
+    testname varchar(40),
+    shortcode varchar(4),
+    primary key(shortcode),
+    unique(id)
 );
 
 CREATE TABLE userdevice (
@@ -21,8 +29,9 @@ CREATE TABLE userdevice (
     deviceid deviceid_t,
     startdt eventstamp_t,
     enddt eventstamp_t,
+    testseries testseriesref_t,
     id id_t,
-    primary key(userid, deviceid),
+    primary key(userid, deviceid, testseries),
     unique(id)
 );
 
