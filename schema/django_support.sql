@@ -14,7 +14,7 @@ CREATE OR REPLACE function gen_id_userdevice_update() returns trigger as $gen_id
        	  new.deviceid != old.deviceid OR 
 	  new.testseries != old.testseries)
 	  THEN
-	  new.id = sha1(concat(new.userid,new.deviceid,new.testseries));
+	  new.id = sha1(new.userid || new.deviceid || new.testseries));
 	  END IF;
        return NULL;
        END;
@@ -56,7 +56,7 @@ CREATE OR REPLACE function gen_id_users_update() returns trigger as $gen_id_user
        	   OR new.name != old.name OR 
        	   new.email != old.email)
 	  THEN
-	  new.id = sha1(concat(new.email,new.name));
+	  new.id = sha1(new.email || new.name);
 	  END IF;
        return NULL;
        END;
