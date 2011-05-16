@@ -11,6 +11,13 @@ from time import time
 def index(request):
     return render_to_response('index.html')
 
+def newuser(request):
+    return render_to_response('newuser.html')
+ 
+def adduser(request):
+    return HttpResponse("new user added.")
+
+
 def showdevices(request):
     device_list = Devices.objects.all()
     return render_to_response('devices.html', {'device_list': device_list})
