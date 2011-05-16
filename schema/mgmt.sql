@@ -77,7 +77,7 @@ CREATE TABLE devices (
 CREATE TABLE users (
     id id_t,
     name varchar(100) NOT NULL,
-    email varchar(80) NOT NULL,
+    email email_t NOT NULL CHECK (LENGTH(VALUE) > 0),
     street varchar(80) DEFAULT NULL,
     city varchar(80) DEFAULT NULL,
     state varchar(30) DEFAULT NULL,

@@ -14,6 +14,7 @@ create domain ssid_t as varchar(32) NOT NULL;
 create domain inetn_t as inet NOT NULL;
 create domain dnsname_t as varchar(255);
 create domain dhcp_action_t varchar(20) DEFAULT NULL::character varying NOT NULL;
+create domain email_t varhcar(80) DEFAULT NULL;
 
 -- create domain id_t as bigint NOT NULL; -- trigger needed
 -- create domain idref_t as bigint; -- trigger neededd
