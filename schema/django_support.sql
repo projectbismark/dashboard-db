@@ -4,10 +4,11 @@
 -- TG_TABLE_NAME
 -- TG_SCHEMA_NAME
 -- TG_TRIGGER
-drop trigger gen_id_userdevice;
 
+drop trigger if exists gen_id_userdevice_insert on users cascade;
+drop trigger if exists gen_id_userdevice_update on users cascade;
 
-CREATE OR REPLACE function gen_id_userdevice() returns trigger as $gen_id_userdevice$
+CREATE OR REPLACE function gen_id_userdevice_update() returns trigger as $gen_id_userdevice_update$
        BEGIN
        IF (new.userid != old.userid OR 
        	  new.deviceid != old.deviceid OR 
@@ -17,11 +18,14 @@ CREATE OR REPLACE function gen_id_userdevice() returns trigger as $gen_id_userde
 	  END IF;
        return NULL;
        END;
-$gen_id_userdevice$
+$gen_id_userdevice_update$
 language plpgsql strict immutable;
 
-create trigger gen_id_userdevice before insert or update on userdevice
-	for each row execute procedure gen_id_userdevice();
+create trigger gen_id_userdevice_update before update on userdevice
+	for each row execute procedure gen_id_userdevice_update();
+
+create trigger gen_id_userdevice_insert before insert on userdevice
+	for each row execute procedure gen_id_userdevice_insert();
 
 -- CREATE OR REPLACE function gen_id_measurement() returns trigger as $gen_id_measurement$
 --        BEGIN
@@ -45,30 +49,6 @@ create trigger gen_id_userdevice before insert or update on userdevice
 -- $gen_id_measurement$
 -- language plpgsql strict immutable;
 
-CREATE OR REPLACE function gen_id_measurement() returns trigger as $gen_id_measurement$
-       BEGIN
-       IF (new.deviceid !=
-       	   old.deviceid OR 
-       	   new.eventstamp !=
-	   old.eventstamp OR 
-	   new.dst !=
-	   old.dst OR
-	   new.src !=
-	   old.src )
-	  THEN
-	  new.id = sha1(concat(
-	  new.deviceid,
-	  new.eventstamp,
-	  new.dst,
-	  new.src));
-	  END IF;
-       return NULL;
-       END;
-$gen_id_measurement$
-language plpgsql strict immutable;
-
-create trigger gen_id_measurements before insert or update on measurements_tmpl
-	for each row execute procedure gen_id_measurement();
 
 CREATE OR REPLACE function gen_id_users_update() returns trigger as $gen_id_users_update$
        BEGIN
@@ -90,10 +70,13 @@ CREATE OR REPLACE function gen_id_users_insert() returns trigger as $gen_id_user
 	  THEN
 	  new.id = sha1(new.email || new.name);
 	  END IF;
-       return NULL;
+	  RETURN NULL;
        END;
 $gen_id_users_insert$
 language plpgsql strict immutable;
+
+drop trigger if exists gen_id_users_insert on users cascade;
+drop trigger if exists gen_id_users_update on users cascade;
 
 create trigger gen_id_users_insert before insert on users
 	for each row execute procedure gen_id_users_insert();

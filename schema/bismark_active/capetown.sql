@@ -1,5 +1,7 @@
 \i defaults.cfg
 
+-- NOTE TRIGGERS MUST BE CREATED FOR EACH TABLE FOR DJANGO TO PLAY BALL
+
 CREATE TABLE aggl3bitrate (like measurements_tmpl including defaults including constraints including indexes);
 CREATE TABLE bitrate (like measurements_tmpl including defaults including constraints including indexes);
 CREATE TABLE capacity (like measurements_tmpl including defaults including constraints including indexes);
@@ -16,4 +18,18 @@ CREATE TABLE dnsdelayc (like measurements_tmpl including defaults including cons
 CREATE TABLE dnsdelaync (like measurements_tmpl including defaults including constraints including indexes);
 CREATE TABLE dnsfail (like measurements_tmpl including defaults including constraints including indexes);
 CREATE TABLE dnsfailc (like measurements_tmpl including defaults including constraints including indexes);
+
 CREATE TABLE dnsfailnc (like measurements_tmpl including defaults including constraints including indexes);
+
+-- Now we have to cope with !@#!@ django for each table
+-- not done yet, just testing
+
+create trigger gen_id_dnsfailnc_update before update on dnsfailnc
+	for each row execute procedure gen_id_measurement_update();
+
+create trigger gen_id_dnsfailnc_insert before insert on dnsfailnc
+	for each row execute procedure gen_id_measurement_insert();
+
+-- And we should alter storage to being external for the !@#!@ ids
+
+alter table dnsfailnc alter column id set storage external; 
