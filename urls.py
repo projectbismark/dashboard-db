@@ -25,6 +25,9 @@ urlpatterns = patterns('',
      (r'^data/(?P<device>\w+)', 'dashboard.summary.views.line_data2'),
      (r'^data_chart/(?P<device>\w+)', 'dashboard.summary.views.cvs_linegraph'),
      (r'^data/', 'dashboard.summary.views.pie_chart'),
+     (r'^newuser.html', 'dashboard.summary.views.newuser'),
+     (r'^adduser', 'dashboard.summary.views.adduser'),
      (r'^static/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.MEDIA_ROOT})
+
 )
 
