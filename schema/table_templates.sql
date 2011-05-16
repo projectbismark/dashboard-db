@@ -19,6 +19,8 @@ CREATE TABLE measurements_tmpl (
     primary key (deviceid, eventstamp, dst, src) -- dst,src maybe not needed
 );
 
+-- it's my hope that this attribute migrates to copies, but have to check
+
 alter TABLE measurements_tmpl ALTER COLUMN toolid set storage EXTERNAL;
 alter TABLE measurements_tmpl ALTER COLUMN id set storage EXTERNAL;
 

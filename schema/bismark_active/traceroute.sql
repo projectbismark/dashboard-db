@@ -1,21 +1,21 @@
 \i defaults.cfg
 
--- this can't possibly work
-
-CREATE TABLE traceroute_hops (
-    tid numeric(11,0) DEFAULT NULL::numeric,
-    hop_id numeric(11,0) DEFAULT NULL::numeric,
-    ip inet,
-    rtt double precision
-);
-
 CREATE TABLE traceroutes (
-    deviceid deviceid_t,
-    srcip inet DEFAULT NULL,
-    dstip inet DEFAULT NULL,
-    eventstamp eventstamp_t,
+    deviceid deviceid_t NOT NULL,
+    srcip inet NOT NULL,
+    dstip inet NOT NULL,
+    eventstamp eventstamp_t NOT NULL,
     hops integer DEFAULT 0,
     id id_t,
-    primary key(id)
+    primary key(deviceid,eventstamp,dstip,srcip),
+    unique(id)
+);
+
+CREATE TABLE traceroute_hops (
+    id idref_t NOT NULL references traceroutes(id),
+    hop smallint NOT NULL,
+    ip inet,
+    rtt double precision,
+    primary key(id,hop)
 );
 
