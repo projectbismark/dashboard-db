@@ -9,110 +9,43 @@
 
 from django.db import models
 
-class MeasurementsTmpl(models.Model):
-    deviceid = models.TextField() # This field type is a guess.
-    toolid = models.IntegerField()
-    src = models.IPAddressField()
-    dst = models.IPAddressField()
-    eventstamp = models.DecimalField(max_digits=20, decimal_places=0)
-    average = models.FloatField()
-    std = models.FloatField()
-    minimum = models.FloatField()
-    maximum = models.FloatField()
-    median = models.FloatField()
-    iqr = models.FloatField()
-    id = models.TextField(primary_key=True) # This field type is a guess.
+class PgBuffercache(models.Model):
+    bufferid = models.IntegerField()
+    relfilenode = models.TextField() # This field type is a guess.
+    reltablespace = models.TextField() # This field type is a guess.
+    reldatabase = models.TextField() # This field type is a guess.
+    relforknumber = models.SmallIntegerField()
+    relblocknumber = models.BigIntegerField()
+    isdirty = models.BooleanField()
+    usagecount = models.SmallIntegerField()
     class Meta:
-        db_table = u'measurements_tmpl'
+        db_table = u'pg_buffercache'
 
-class Ulrttup(models.Model):
-    deviceid = models.TextField() # This field type is a guess.
-    toolid = models.IntegerField()
-    src = models.IPAddressField()
-    dst = models.IPAddressField()
-    eventstamp = models.DecimalField(max_digits=20, decimal_places=0)
-    average = models.FloatField()
-    std = models.FloatField()
-    minimum = models.FloatField()
-    maximum = models.FloatField()
-    median = models.FloatField()
-    iqr = models.FloatField()
+class Testseries(models.Model):
     id = models.TextField(primary_key=True) # This field type is a guess.
+    testname = models.CharField(max_length=40)
+    shortcode = models.CharField(max_length=4, primary_key=True)
     class Meta:
-        db_table = u'ulrttup'
-
-class Dnsdelay(models.Model):
-    deviceid = models.TextField() # This field type is a guess.
-    toolid = models.IntegerField()
-    src = models.IPAddressField()
-    dst = models.IPAddressField()
-    eventstamp = models.DecimalField(max_digits=20, decimal_places=0)
-    average = models.FloatField()
-    std = models.FloatField()
-    minimum = models.FloatField()
-    maximum = models.FloatField()
-    median = models.FloatField()
-    iqr = models.FloatField()
-    id = models.TextField(primary_key=True) # This field type is a guess.
-    class Meta:
-        db_table = u'dnsdelay'
-
-class Dnsdelayc(models.Model):
-    deviceid = models.TextField() # This field type is a guess.
-    toolid = models.IntegerField()
-    src = models.IPAddressField()
-    dst = models.IPAddressField()
-    eventstamp = models.DecimalField(max_digits=20, decimal_places=0)
-    average = models.FloatField()
-    std = models.FloatField()
-    minimum = models.FloatField()
-    maximum = models.FloatField()
-    median = models.FloatField()
-    iqr = models.FloatField()
-    id = models.TextField(primary_key=True) # This field type is a guess.
-    class Meta:
-        db_table = u'dnsdelayc'
-
-class Dnsdelaync(models.Model):
-    deviceid = models.TextField() # This field type is a guess.
-    toolid = models.IntegerField()
-    src = models.IPAddressField()
-    dst = models.IPAddressField()
-    eventstamp = models.DecimalField(max_digits=20, decimal_places=0)
-    average = models.FloatField()
-    std = models.FloatField()
-    minimum = models.FloatField()
-    maximum = models.FloatField()
-    median = models.FloatField()
-    iqr = models.FloatField()
-    id = models.TextField(primary_key=True) # This field type is a guess.
-    class Meta:
-        db_table = u'dnsdelaync'
-
-class Tools(models.Model):
-    id = models.TextField(primary_key=True) # This field type is a guess.
-    tool = models.CharField(max_length=10)
-    tool_desc = models.CharField(max_length=80)
-    class Meta:
-        db_table = u'tools'
+        db_table = u'testseries'
 
 class Sla(models.Model):
     id = models.TextField(primary_key=True) # This field type is a guess.
     isp = models.CharField(max_length=30)
-    sla = models.CharField(max_length=50)
+    sla = models.CharField(max_length=30)
     dl = models.BigIntegerField()
     ul = models.BigIntegerField()
     class Meta:
         db_table = u'sla'
 
-class Userdevice(models.Model):
+class Userdevices(models.Model):
     userid = models.TextField() # This field type is a guess.
     deviceid = models.TextField() # This field type is a guess.
     startdt = models.DecimalField(max_digits=20, decimal_places=0)
     enddt = models.DecimalField(max_digits=20, decimal_places=0)
+    testseries = models.TextField() # This field type is a guess.
     id = models.TextField(primary_key=True) # This field type is a guess.
     class Meta:
-        db_table = u'userdevice'
+        db_table = u'userdevices'
 
 class Devices(models.Model):
     deviceid = models.TextField(primary_key=True) # This field type is a guess.
@@ -124,7 +57,7 @@ class Devices(models.Model):
         db_table = u'devices'
 
 class Users(models.Model):
-    userid = models.TextField(primary_key=True) # This field type is a guess.
+    id = models.TextField(primary_key=True) # This field type is a guess.
     name = models.CharField(max_length=100)
     email = models.CharField(max_length=80)
     street = models.CharField(max_length=80)
@@ -147,9 +80,16 @@ class Usersla(models.Model):
     class Meta:
         db_table = u'usersla'
 
-class Dnsfail(models.Model):
+class Tools(models.Model):
+    id = models.TextField(primary_key=True) # This field type is a guess.
+    tool = models.CharField(max_length=10)
+    version = models.CharField(max_length=10)
+    tool_desc = models.CharField(max_length=80)
+    class Meta:
+        db_table = u'tools'
+
+class Jitter(models.Model):
     deviceid = models.TextField() # This field type is a guess.
-    toolid = models.IntegerField()
     src = models.IPAddressField()
     dst = models.IPAddressField()
     eventstamp = models.DecimalField(max_digits=20, decimal_places=0)
@@ -160,12 +100,12 @@ class Dnsfail(models.Model):
     median = models.FloatField()
     iqr = models.FloatField()
     id = models.TextField(primary_key=True) # This field type is a guess.
+    toolid = models.TextField() # This field type is a guess.
     class Meta:
-        db_table = u'dnsfail'
+        db_table = u'jitter'
 
-class Dnsfailc(models.Model):
+class MeasurementsTmpl(models.Model):
     deviceid = models.TextField() # This field type is a guess.
-    toolid = models.IntegerField()
     src = models.IPAddressField()
     dst = models.IPAddressField()
     eventstamp = models.DecimalField(max_digits=20, decimal_places=0)
@@ -176,40 +116,12 @@ class Dnsfailc(models.Model):
     median = models.FloatField()
     iqr = models.FloatField()
     id = models.TextField(primary_key=True) # This field type is a guess.
+    toolid = models.ForeignKey(Tools, db_column='toolid')
     class Meta:
-        db_table = u'dnsfailc'
-
-class Dnsfailnc(models.Model):
-    deviceid = models.TextField() # This field type is a guess.
-    toolid = models.IntegerField()
-    src = models.IPAddressField()
-    dst = models.IPAddressField()
-    eventstamp = models.DecimalField(max_digits=20, decimal_places=0)
-    average = models.FloatField()
-    std = models.FloatField()
-    minimum = models.FloatField()
-    maximum = models.FloatField()
-    median = models.FloatField()
-    iqr = models.FloatField()
-    id = models.TextField(primary_key=True) # This field type is a guess.
-    class Meta:
-        db_table = u'dnsfailnc'
-
-class PgBuffercache(models.Model):
-    bufferid = models.IntegerField()
-    relfilenode = models.TextField() # This field type is a guess.
-    reltablespace = models.TextField() # This field type is a guess.
-    reldatabase = models.TextField() # This field type is a guess.
-    relforknumber = models.SmallIntegerField()
-    relblocknumber = models.BigIntegerField()
-    isdirty = models.BooleanField()
-    usagecount = models.SmallIntegerField()
-    class Meta:
-        db_table = u'pg_buffercache'
+        db_table = u'measurements_tmpl'
 
 class Aggl3Bitrate(models.Model):
     deviceid = models.TextField() # This field type is a guess.
-    toolid = models.IntegerField()
     src = models.IPAddressField()
     dst = models.IPAddressField()
     eventstamp = models.DecimalField(max_digits=20, decimal_places=0)
@@ -220,12 +132,12 @@ class Aggl3Bitrate(models.Model):
     median = models.FloatField()
     iqr = models.FloatField()
     id = models.TextField(primary_key=True) # This field type is a guess.
+    toolid = models.TextField() # This field type is a guess.
     class Meta:
         db_table = u'aggl3bitrate'
 
 class Bitrate(models.Model):
     deviceid = models.TextField() # This field type is a guess.
-    toolid = models.IntegerField()
     src = models.IPAddressField()
     dst = models.IPAddressField()
     eventstamp = models.DecimalField(max_digits=20, decimal_places=0)
@@ -236,12 +148,12 @@ class Bitrate(models.Model):
     median = models.FloatField()
     iqr = models.FloatField()
     id = models.TextField(primary_key=True) # This field type is a guess.
+    toolid = models.TextField() # This field type is a guess.
     class Meta:
         db_table = u'bitrate'
 
 class Capacity(models.Model):
     deviceid = models.TextField() # This field type is a guess.
-    toolid = models.IntegerField()
     src = models.IPAddressField()
     dst = models.IPAddressField()
     eventstamp = models.DecimalField(max_digits=20, decimal_places=0)
@@ -252,28 +164,12 @@ class Capacity(models.Model):
     median = models.FloatField()
     iqr = models.FloatField()
     id = models.TextField(primary_key=True) # This field type is a guess.
+    toolid = models.TextField() # This field type is a guess.
     class Meta:
         db_table = u'capacity'
 
-class Jitter(models.Model):
-    deviceid = models.TextField() # This field type is a guess.
-    toolid = models.IntegerField()
-    src = models.IPAddressField()
-    dst = models.IPAddressField()
-    eventstamp = models.DecimalField(max_digits=20, decimal_places=0)
-    average = models.FloatField()
-    std = models.FloatField()
-    minimum = models.FloatField()
-    maximum = models.FloatField()
-    median = models.FloatField()
-    iqr = models.FloatField()
-    id = models.TextField(primary_key=True) # This field type is a guess.
-    class Meta:
-        db_table = u'jitter'
-
 class Lmrtt(models.Model):
     deviceid = models.TextField() # This field type is a guess.
-    toolid = models.IntegerField()
     src = models.IPAddressField()
     dst = models.IPAddressField()
     eventstamp = models.DecimalField(max_digits=20, decimal_places=0)
@@ -284,12 +180,12 @@ class Lmrtt(models.Model):
     median = models.FloatField()
     iqr = models.FloatField()
     id = models.TextField(primary_key=True) # This field type is a guess.
+    toolid = models.TextField() # This field type is a guess.
     class Meta:
         db_table = u'lmrtt'
 
 class Pktloss(models.Model):
     deviceid = models.TextField() # This field type is a guess.
-    toolid = models.IntegerField()
     src = models.IPAddressField()
     dst = models.IPAddressField()
     eventstamp = models.DecimalField(max_digits=20, decimal_places=0)
@@ -300,12 +196,12 @@ class Pktloss(models.Model):
     median = models.FloatField()
     iqr = models.FloatField()
     id = models.TextField(primary_key=True) # This field type is a guess.
+    toolid = models.TextField() # This field type is a guess.
     class Meta:
         db_table = u'pktloss'
 
 class Rtt(models.Model):
     deviceid = models.TextField() # This field type is a guess.
-    toolid = models.IntegerField()
     src = models.IPAddressField()
     dst = models.IPAddressField()
     eventstamp = models.DecimalField(max_digits=20, decimal_places=0)
@@ -316,12 +212,12 @@ class Rtt(models.Model):
     median = models.FloatField()
     iqr = models.FloatField()
     id = models.TextField(primary_key=True) # This field type is a guess.
+    toolid = models.TextField() # This field type is a guess.
     class Meta:
         db_table = u'rtt'
 
 class Shaperate(models.Model):
     deviceid = models.TextField() # This field type is a guess.
-    toolid = models.IntegerField()
     src = models.IPAddressField()
     dst = models.IPAddressField()
     eventstamp = models.DecimalField(max_digits=20, decimal_places=0)
@@ -332,12 +228,12 @@ class Shaperate(models.Model):
     median = models.FloatField()
     iqr = models.FloatField()
     id = models.TextField(primary_key=True) # This field type is a guess.
+    toolid = models.TextField() # This field type is a guess.
     class Meta:
         db_table = u'shaperate'
 
 class Ulrttdw(models.Model):
     deviceid = models.TextField() # This field type is a guess.
-    toolid = models.IntegerField()
     src = models.IPAddressField()
     dst = models.IPAddressField()
     eventstamp = models.DecimalField(max_digits=20, decimal_places=0)
@@ -348,8 +244,133 @@ class Ulrttdw(models.Model):
     median = models.FloatField()
     iqr = models.FloatField()
     id = models.TextField(primary_key=True) # This field type is a guess.
+    toolid = models.TextField() # This field type is a guess.
     class Meta:
         db_table = u'ulrttdw'
+
+class Ulrttup(models.Model):
+    deviceid = models.TextField() # This field type is a guess.
+    src = models.IPAddressField()
+    dst = models.IPAddressField()
+    eventstamp = models.DecimalField(max_digits=20, decimal_places=0)
+    average = models.FloatField()
+    std = models.FloatField()
+    minimum = models.FloatField()
+    maximum = models.FloatField()
+    median = models.FloatField()
+    iqr = models.FloatField()
+    id = models.TextField(primary_key=True) # This field type is a guess.
+    toolid = models.TextField() # This field type is a guess.
+    class Meta:
+        db_table = u'ulrttup'
+
+class Dnsdelay(models.Model):
+    deviceid = models.TextField() # This field type is a guess.
+    src = models.IPAddressField()
+    dst = models.IPAddressField()
+    eventstamp = models.DecimalField(max_digits=20, decimal_places=0)
+    average = models.FloatField()
+    std = models.FloatField()
+    minimum = models.FloatField()
+    maximum = models.FloatField()
+    median = models.FloatField()
+    iqr = models.FloatField()
+    id = models.TextField(primary_key=True) # This field type is a guess.
+    toolid = models.TextField() # This field type is a guess.
+    class Meta:
+        db_table = u'dnsdelay'
+
+class Dnsdelayc(models.Model):
+    deviceid = models.TextField() # This field type is a guess.
+    src = models.IPAddressField()
+    dst = models.IPAddressField()
+    eventstamp = models.DecimalField(max_digits=20, decimal_places=0)
+    average = models.FloatField()
+    std = models.FloatField()
+    minimum = models.FloatField()
+    maximum = models.FloatField()
+    median = models.FloatField()
+    iqr = models.FloatField()
+    id = models.TextField(primary_key=True) # This field type is a guess.
+    toolid = models.TextField() # This field type is a guess.
+    class Meta:
+        db_table = u'dnsdelayc'
+
+class Dnsdelaync(models.Model):
+    deviceid = models.TextField() # This field type is a guess.
+    src = models.IPAddressField()
+    dst = models.IPAddressField()
+    eventstamp = models.DecimalField(max_digits=20, decimal_places=0)
+    average = models.FloatField()
+    std = models.FloatField()
+    minimum = models.FloatField()
+    maximum = models.FloatField()
+    median = models.FloatField()
+    iqr = models.FloatField()
+    id = models.TextField(primary_key=True) # This field type is a guess.
+    toolid = models.TextField() # This field type is a guess.
+    class Meta:
+        db_table = u'dnsdelaync'
+
+class Dnsfail(models.Model):
+    deviceid = models.TextField() # This field type is a guess.
+    src = models.IPAddressField()
+    dst = models.IPAddressField()
+    eventstamp = models.DecimalField(max_digits=20, decimal_places=0)
+    average = models.FloatField()
+    std = models.FloatField()
+    minimum = models.FloatField()
+    maximum = models.FloatField()
+    median = models.FloatField()
+    iqr = models.FloatField()
+    id = models.TextField(primary_key=True) # This field type is a guess.
+    toolid = models.TextField() # This field type is a guess.
+    class Meta:
+        db_table = u'dnsfail'
+
+class Dnsfailc(models.Model):
+    deviceid = models.TextField() # This field type is a guess.
+    src = models.IPAddressField()
+    dst = models.IPAddressField()
+    eventstamp = models.DecimalField(max_digits=20, decimal_places=0)
+    average = models.FloatField()
+    std = models.FloatField()
+    minimum = models.FloatField()
+    maximum = models.FloatField()
+    median = models.FloatField()
+    iqr = models.FloatField()
+    id = models.TextField(primary_key=True) # This field type is a guess.
+    toolid = models.TextField() # This field type is a guess.
+    class Meta:
+        db_table = u'dnsfailc'
+
+class WifiAssoc(models.Model):
+    stationmac = models.TextField() # This field type is a guess.
+    firstseen = models.DecimalField(max_digits=20, decimal_places=0)
+    lastseen = models.DecimalField(max_digits=20, decimal_places=0)
+    power = models.DecimalField(max_digits=11, decimal_places=0)
+    numpkts = models.DecimalField(max_digits=11, decimal_places=0)
+    bssid = models.TextField() # This field type is a guess.
+    probedessid = models.CharField(max_length=32)
+    deviceid = models.TextField() # This field type is a guess.
+    class Meta:
+        db_table = u'wifi_assoc'
+
+class Dnsfailnc(models.Model):
+    deviceid = models.TextField() # This field type is a guess.
+    src = models.IPAddressField()
+    dst = models.IPAddressField()
+    eventstamp = models.DecimalField(max_digits=20, decimal_places=0)
+    average = models.FloatField()
+    std = models.FloatField()
+    minimum = models.FloatField()
+    maximum = models.FloatField()
+    median = models.FloatField()
+    iqr = models.FloatField()
+    id = models.TextField(primary_key=True) # This field type is a guess.
+    toolid = models.TextField() # This field type is a guess.
+    class Meta:
+        db_table = u'dnsfailnc'
 
 class TracerouteHops(models.Model):
     tid = models.DecimalField(max_digits=11, decimal_places=0)
@@ -409,18 +430,6 @@ class Events(models.Model):
     event = models.CharField(max_length=50)
     class Meta:
         db_table = u'events'
-
-class WifiAssoc(models.Model):
-    stationmac = models.TextField() # This field type is a guess.
-    firstseen = models.DecimalField(max_digits=20, decimal_places=0)
-    lastseen = models.DecimalField(max_digits=20, decimal_places=0)
-    power = models.DecimalField(max_digits=11, decimal_places=0)
-    numpkts = models.DecimalField(max_digits=11, decimal_places=0)
-    bssid = models.TextField() # This field type is a guess.
-    probedessid = models.CharField(max_length=32)
-    deviceid = models.TextField() # This field type is a guess.
-    class Meta:
-        db_table = u'wifi_assoc'
 
 class WifiScan(models.Model):
     deviceid = models.TextField() # This field type is a guess.
