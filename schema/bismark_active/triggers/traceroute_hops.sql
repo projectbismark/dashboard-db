@@ -21,8 +21,8 @@ CREATE OR REPLACE function gen_id_django_bs_insert() returns trigger as $gen_id_
 $gen_id_django_bs_insert$
 language plpgsql strict immutable;
 
-create trigger gen_id_django_bs_update before update on django_bs
+create trigger gen_id_django_bs_update before update on traceroute_hops
 	for each row execute procedure gen_id_django_bs_update();
 
-create trigger gen_id_django_bs_insert before insert on django_bs
+create trigger gen_id_django_bs_insert before insert on traceroute_hops
 	for each row execute procedure gen_id_django_bs_insert();
