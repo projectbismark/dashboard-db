@@ -1,10 +1,11 @@
-set path import, pg_catalog;
+drop schema import;
+create schema import;
 
-\i olddata.sql
+set search_path = import, pg_catalog;
+\i DEVICES.sql
+\i /tmp/idashboard/DEVICES.sql
 
-insert into temp table newusers2 select * from users;
-insert into temp table sla2 select * from sla;
-insert into temp table userdevices2 select * from userdevice;
-select * from users into temp table userdevicefix;
+set search_path = public, pg_catalog;
 
-set path = public, pg_catalog;
+insert into devices (deviceid,name,device_type,os,version) select macid, deviceid, type, os, version from import.devices;
+

@@ -71,6 +71,8 @@ CREATE TABLE devices (
     device_type device_type_t,
     os osname_t,
     version version_t,
+    active bool,
+    last_update eventstamp_t,
     primary key(deviceid)
 );
 
