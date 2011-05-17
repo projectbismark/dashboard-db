@@ -13,7 +13,7 @@ CREATE TABLE measurements_tmpl (
     maximum float8,
     median float8,
     iqr float8,
-    exitstatus integer default -1,
+    exitstatus integer default -9999,
     id id_t,
     toolid toolidref_t references tools(id),
     unique(id),
