@@ -5,5 +5,5 @@ then
 . ~/.dbdashboardmysql
 fi
 
-mysql "$DBHOST -u $DBUSER -p$DBPASS $DB"
+mysql "-h $DBHOST -u $DBUSER -p$DBPASS $DB"
 

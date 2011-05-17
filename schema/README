@@ -4,5 +4,9 @@ FOR personal use and testing
 
 http://dba.stackexchange.com/questions/1883/how-do-i-install-pgcrypto-for-postgresql-in-ubuntu-server
 
+The system does very little error checking at present, but if you've made
+the dependencies (too many to list), the following should create a good 
+db.
+
 make createall
 
