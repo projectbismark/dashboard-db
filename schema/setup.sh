@@ -6,7 +6,8 @@ then
 DB="--dbname $1"
 fi
 
-CONTRIBDIR=/usr/share/postgresql/8.4/contrib
+PVER=`psql --version | head -1 | awk '{print $3;}' | cut -f1-2 -d.`
+CONTRIBDIR=/usr/share/postgresql/$PVER/contrib
 
 # fixme, you need perms to create databases
 # You need:
