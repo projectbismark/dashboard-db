@@ -67,6 +67,7 @@ CREATE TABLE userdevices (
 
 CREATE TABLE devices (
     deviceid deviceid_t,
+    name dnsname_t,
     device_type device_type_t,
     os osname_t,
     version version_t,
