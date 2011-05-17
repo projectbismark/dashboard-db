@@ -4,8 +4,8 @@
 
 CREATE TABLE measurements_tmpl (
     deviceid deviceidref_t NOT NULL, 
-    src inetn_t,
-    dst inetn_t,
+    srcip inetn_t,
+    dstip inetn_t,
     eventstamp eventstamp_t,
     average float8,
     std float8,
