@@ -10,3 +10,11 @@ db.
 
 make createall
 
+If you wish to create a database not named after you, you can set the 
+DB environment variable, e.g.
+
+make DB=mytest createall
+
+PLEASE NOTE - DON'T DO THIS ON A PRODUCTION SYSTEM YET. IT WIPES OUT THE DATABASE.
+
+make DB=captown reallyclean 

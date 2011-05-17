@@ -1,8 +1,35 @@
 #!/bin/sh
 # Convert from the mysql database to the postgres one
+echo "
+| APPS                           |
+| ARP_LOGS                       |
+| DEVICES                        |
+| DHCP_LOGS                      |
+| EVENTS                         |
+| EVENT_LOGS                     |
+| FLOWS                          |
+| FLOWS_17jul_26oct_2010         |
+| FLOWS_26oct_7dec_2010          |
+| FLOWS_SAMPLES                  |
+| FLOWS_SAMPLES_17jul_26oct_2010 |
+| FLOWS_SAMPLES_26oct_7dec_2010  |
+| FLOWS_SAMPLES_newformat        |
+| FLOWS_newformat                |
+| MEASUREMENTS                   |
+| SLA                            |
+| TRACEROUTES                    |
+| TRACEROUTE_HOPS                |
+| USERDEVICE                     |
+| USERS                          |
+| USERSLA                        |
+| WIFI_ASSOC                     |
+| WIFI_SCAN          
+"
 
 TEMP=/tmp/idashboard
-TABLES="USERSLA USERDEVICE DEVICES SLA USERS"
+#TABLES="USERSLA USERDEVICE DEVICES SLA USERS DHCP_LOGS ARP_LOGS EVENTS EVENT_LOGS TRACEROUTES TRACEROUTE_HOPS WIFI_ASSOC WIFI_SCAN"
+#TABLES="USERSLA USERDEVICE DEVICES SLA USERS TRACEROUTES TRACEROUTE_HOPS WIFI_ASSOC WIFI_SCAN"
+TABLES="SLA USERSLA USERDEVICE DEVICES USERS MEASUREMENTS"
 
 if [ -f ~/.dbdashboardmysql ]
 then
@@ -10,9 +37,7 @@ then
 fi
 
 mkdir $TEMP
-export MARGS="$DBHOST -u $DBUSER -p$DBPASS $DB"
-
-#export MARGS="-h networkdashboard.org -u bismark_live_ro bismark_live_v1 -pf8d74cf689"
+export MARGS="-h $DBHOST -u $DBUSER -p$DBPASS $DB"
 
 for i in $TABLES
 do
