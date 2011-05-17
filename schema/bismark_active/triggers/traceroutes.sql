@@ -7,7 +7,11 @@ CREATE OR REPLACE function gen_id_traceroutes_update() returns trigger as $gen_i
        	   new.dstip !=	old.dstip OR
 	   new.eventstamp != old.eventstamp)
 	  THEN
- 	  new.id = sha1( new.deviceid || new.srcip || new.dstip || new.eventstamp );
+ 	  new.id = sha1( 
+		new.deviceid || 
+		host(new.srcip) || 
+		host(new.dstip) || 
+		to_char(new.eventstamp,'JHH24MISSUS'));
 	  END IF;
        return NEW;
        END;
@@ -17,7 +21,11 @@ language plpgsql strict immutable;
 
 CREATE OR REPLACE function gen_id_traceroutes_insert() returns trigger as $gen_id_traceroutes_insert$
        BEGIN
- 	  new.id = sha1( new.deviceid || new.srcip || new.dstip || new.eventstamp );
+ 	  new.id = sha1( 
+		new.deviceid || 
+		host(new.srcip) || 
+		host(new.dstip) || 
+		to_char(new.eventstamp,'JHH24MISSUS'));
        return NEW;
        END;
 $gen_id_traceroutes_insert$

@@ -3,7 +3,7 @@
 CREATE OR REPLACE function gen_id_django_bs_update() returns trigger as $gen_id_django_bs_update$
        BEGIN
        IF (new.id != old.id OR 
-       	   new.hop !=	old.hop OR
+       	   new.hop != old.hop OR
 	  THEN
  	  new.django_bs = sha1( new.id || new.hop );
 	  END IF;
