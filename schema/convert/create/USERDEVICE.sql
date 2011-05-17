@@ -1,6 +1,6 @@
 CREATE TABLE USERDEVICE (
-  userid int(11) default NULL,
-  deviceid varchar(15) default NULL,
-  start bigint(20) default NULL,
-  end bigint(20) default NULL
+  userid integer default NULL,
+  deviceid macaddr default NULL,
+  start bigint default NULL,
+  end bigint default NULL
 );
