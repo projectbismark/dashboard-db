@@ -1,6 +1,8 @@
+FOR personal use and testing
 
 # You will need PGCRYPTO
 
 http://dba.stackexchange.com/questions/1883/how-do-i-install-pgcrypto-for-postgresql-in-ubuntu-server
 
+make createall
 

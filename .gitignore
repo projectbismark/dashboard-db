@@ -3,3 +3,5 @@ settings_dev.py
 .*.swp
 #*
 *.gsql
+.password
+.dashboard
