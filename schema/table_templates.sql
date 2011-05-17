@@ -39,9 +39,9 @@ CREATE OR REPLACE function gen_id_measurement_update() returns trigger as $gen_i
 	   old.srcip )
 	  THEN
 	  new.id = sha1( (new.deviceid) || 
-			 to_char(new.eventstamp,'JHH24MISSUS') || 
+			 new.eventstamp || 
 	  	   	 host(new.dstip) || 
-			 host(new.srcip) ));
+			 host(new.srcip) );
 	  END IF;
        return NEW;
        END;
@@ -51,9 +51,9 @@ language plpgsql strict immutable;
 CREATE OR REPLACE function gen_id_measurement_insert() returns trigger as $gen_id_measurement_insert$
        BEGIN
 	  new.id = sha1( new.deviceid || 
-			 to_char(new.eventstamp,'JHH24MISSUS') || 
+			 new.eventstamp || 
 	  	   	 host(new.dstip) || 
-			 host(new.srcip)));
+			 host(new.srcip));
        return NEW;
        END;
 $gen_id_measurement_insert$
