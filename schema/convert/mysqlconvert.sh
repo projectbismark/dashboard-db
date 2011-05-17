@@ -4,13 +4,13 @@
 TEMP=/tmp/idashboard
 TABLES="USERSLA USERDEVICE DEVICES SLA USERS"
 
-if [ -x ~/.dbdashboardmysql ]
+if [ -f ~/.dbdashboardmysql ]
 then
 . ~/.dbdashboardmysql
-f
+fi
 
-mkdir -f $TEMP
-export MARGS="$DBHOST" -u $DBUSER -p$DBPASS $DB
+mkdir $TEMP
+export MARGS="$DBHOST -u $DBUSER -p$DBPASS $DB"
 
 #export MARGS="-h networkdashboard.org -u bismark_live_ro bismark_live_v1 -pf8d74cf689"
 

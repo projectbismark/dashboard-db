@@ -1,9 +1,9 @@
 #!/bin/sh
 
-if [ -x ~/.dbdashboardmysql ]
+if [ -f ~/.dbdashboardmysql ]
 then
 . ~/.dbdashboardmysql
-f
+fi
 
-mysql "$DBHOST" -u $DBUSER -p$DBPASS $DB
+mysql "$DBHOST -u $DBUSER -p$DBPASS $DB"
 
