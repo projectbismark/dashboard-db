@@ -1,7 +1,13 @@
-FILES:=$(shell ls *.sql tests/*.sql)
+DB:=$(USERNAME)
 
-all: psql -f 
+all: create
 
+create:
+	createdb $(DB)
+	./setup.sh $(DB)
+
+createall: clean create
+	
 tables:
 
 indexes:
@@ -15,5 +21,8 @@ verify:
 test:
 
 clean:
+	dropdb $(DB)
 
-
+reallyclean: 
+	dropdb $(DB)
+	rm -f *.gsql */*.gsql */*/*.gsql
