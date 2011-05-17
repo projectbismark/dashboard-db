@@ -38,21 +38,22 @@ CREATE OR REPLACE function gen_id_measurement_update() returns trigger as $gen_i
 	   new.src !=
 	   old.src )
 	  THEN
-	  new.id = sha1( new.deviceid || new.eventstamp || 
-	  	   	 new.dst || new.src));
+	  new.id = sha1( (new.deviceid) || 
+			 to_char(new.eventstamp,'JHH24MISSUS') || 
+	  	   	 host(new.dst) || 
+			 host(new.src) ));
 	  END IF;
        return NEW;
        END;
 $gen_id_measurement_update$
 language plpgsql strict immutable;
 
-
 CREATE OR REPLACE function gen_id_measurement_insert() returns trigger as $gen_id_measurement_insert$
        BEGIN
-	  THEN
-	  new.id = sha1( new.deviceid || new.eventstamp || 
-	  	   	 new.dst || new.src));
-	  END IF;
+	  new.id = sha1( new.deviceid || 
+			 to_char(new.eventstamp,'JHH24MISSUS') || 
+	  	   	 host(new.dst) || 
+			 host(new.src)));
        return NEW;
        END;
 $gen_id_measurement_insert$
