@@ -16,6 +16,8 @@ CREATE TABLE traceroute_hops (
     hop smallint NOT NULL,
     ip inet,
     rtt double precision,
-    primary key(id,hop)
+    django_bs id_t,
+    primary key(id,hop),
+    unique(django_bs)
 );
 
