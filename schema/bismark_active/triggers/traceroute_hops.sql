@@ -5,7 +5,7 @@ CREATE OR REPLACE function gen_id_django_bs_update() returns trigger as $gen_id_
        IF (new.id != old.id OR 
        	   new.hop != old.hop OR
 	  THEN
- 	  new.django_bs = sha1( new.id || new.hop );
+ 	  new.django_bs = sha1( new.id || to_char(new.hop,'99999'));
 	  END IF;
        return NEW;
        END;
@@ -15,7 +15,7 @@ language plpgsql strict immutable;
 
 CREATE OR REPLACE function gen_id_django_bs_insert() returns trigger as $gen_id_django_bs_insert$
        BEGIN
- 	  new.django_bs = sha1( new.id || new.hop );
+ 	  new.django_bs = sha1( new.id || to_char(new.hop,'99999') );
        return NEW;
        END;
 $gen_id_django_bs_insert$
