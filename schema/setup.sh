@@ -6,7 +6,8 @@ then
 DB="--dbname $1"
 fi
 
-PVER=`psql --version | head -1 | awk '{print $3;}' | cut -f1-2 -d.`
+#PVER=`psql --version | head -1 | awk '{print $3;}' | cut -f1-2 -d.`
+PVER=8.4
 CONTRIBDIR=/usr/share/postgresql/$PVER/contrib
 
 # fixme, you need perms to create databases
