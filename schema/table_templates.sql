@@ -4,8 +4,8 @@
 
 CREATE TABLE measurements_tmpl (
     deviceid deviceidref_t NOT NULL, 
-    src inetn_t,
-    dst inetn_t,
+    srcip inetn_t,
+    dstip inetn_t,
     eventstamp eventstamp_t,
     average float8,
     std float8,
@@ -17,7 +17,7 @@ CREATE TABLE measurements_tmpl (
     id id_t,
     toolid toolidref_t references tools(id),
     unique(id),
-    primary key (deviceid, eventstamp, dst, src) -- dst,src maybe not needed
+    primary key (deviceid, eventstamp, dstip, srcip) -- dst,src maybe not needed
 );
 
 -- it's my hope that this attribute migrates to copies, but have to check
@@ -33,26 +33,27 @@ CREATE OR REPLACE function gen_id_measurement_update() returns trigger as $gen_i
        	   old.deviceid OR 
        	   new.eventstamp !=
 	   old.eventstamp OR 
-	   new.dst !=
-	   old.dst OR
-	   new.src !=
-	   old.src )
+	   new.dstip !=
+	   old.dstip OR
+	   new.srcip !=
+	   old.srcip )
 	  THEN
-	  new.id = sha1( new.deviceid || new.eventstamp || 
-	  	   	 new.dst || new.src));
+	  new.id = sha1( (new.deviceid) || 
+			 to_char(new.eventstamp,'JHH24MISSUS') || 
+	  	   	 host(new.dstip) || 
+			 host(new.srcip) );
 	  END IF;
        return NEW;
        END;
 $gen_id_measurement_update$
 language plpgsql strict immutable;
 
-
 CREATE OR REPLACE function gen_id_measurement_insert() returns trigger as $gen_id_measurement_insert$
        BEGIN
-	  THEN
-	  new.id = sha1( new.deviceid || new.eventstamp || 
-	  	   	 new.dst || new.src));
-	  END IF;
+	  new.id = sha1( new.deviceid || 
+			 to_char(new.eventstamp,'JHH24MISSUS') || 
+	  	   	 host(new.dstip) || 
+			 host(new.srcip));
        return NEW;
        END;
 $gen_id_measurement_insert$
