@@ -245,13 +245,13 @@ def ignore_file(file):
   return False
 
 if __name__ == '__main__':
-  HOME = os.environ['HOME'] + '/research/bismark/db/bismark/'
+  HOME = os.environ['HOME'] #+ '/research/bismark/db/bismark/'
   #HOME = '/tmp/bismark_test/'
   MEASURE_FILE_DIR = 'var/data/'
-  LOG_DIR = 'var/log/'
-  ARCHIVE_DIR = 'var/data/old'
-  FILE_LOG = 'var/log/xml_parse_files'
-  tables = {'measurement':'MEASUREMENTS','traceroute':'traceroutes','hop':'traceroute_hops','userdevice':'USERDEVICE'}
+  LOG_DIR = 'var/openwrt-log/'
+  ARCHIVE_DIR = 'var/data/openwrt-old'
+  FILE_LOG = 'var/log/xml_openwrt_parse_files'
+  tables = {'measurement':'MEASUREMENTS','traceroute':'traceroutes','hop':'traceroute_hops'}
 
   filelog = open(HOME+FILE_LOG,'w')
   log = gz.open(HOME+LOG_DIR+'insert.log.gz','ab')
