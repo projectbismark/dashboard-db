@@ -250,8 +250,8 @@ if __name__ == '__main__':
   HOME = os.environ['HOME'] #+ '/research/bismark/db/bismark/'
   #HOME = '/tmp/bismark_test/'
   MEASURE_FILE_DIR = 'var/data/'
-  LOG_DIR = 'var/openwrt-log/'
-  ARCHIVE_DIR = 'var/data/openwrt-old'
+  LOG_DIR = 'var/log/'
+  ARCHIVE_DIR = 'var/archive/openwrt'
   FILE_LOG = LOG_DIR + 'xml_openwrt_parse_files'
   tables = {'measurement':'MEASUREMENTS','traceroute':'traceroutes','hop':'traceroute_hops'}
 
@@ -267,7 +267,7 @@ if __name__ == '__main__':
     fcnt += 1
     parsefile(HOME+MEASURE_FILE_DIR+file,tables,log)
     log.write('Done ' + file + '\n')
-    #move_file(HOME+MEASURE_FILE_DIR+file,HOME+ARCHIVE_DIR)
+    move_file(HOME+MEASURE_FILE_DIR+file,HOME+ARCHIVE_DIR)
     if fcnt < -1:
       sys.exit()
   log.close()
