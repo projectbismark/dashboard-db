@@ -242,6 +242,8 @@ def move_file(file,dir):
 def ignore_file(file):
   if '.xml' not in file:
     return True
+  if 'OW' not in file:
+    return True
   return False
 
 if __name__ == '__main__':
