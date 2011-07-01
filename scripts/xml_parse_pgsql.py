@@ -252,7 +252,7 @@ if __name__ == '__main__':
   MEASURE_FILE_DIR = 'var/data/'
   LOG_DIR = 'var/openwrt-log/'
   ARCHIVE_DIR = 'var/data/openwrt-old'
-  FILE_LOG = 'var/log/xml_openwrt_parse_files'
+  FILE_LOG = LOG_DIR + 'xml_openwrt_parse_files'
   tables = {'measurement':'MEASUREMENTS','traceroute':'traceroutes','hop':'traceroute_hops'}
 
   filelog = open(HOME+FILE_LOG,'w')
