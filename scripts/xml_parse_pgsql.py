@@ -195,7 +195,7 @@ def parse_block(block,version,tables,log,file):
   if version == '1.0':
     data = parse_block_v1_0(block,version,tables,log)
     write_block_v1_0(data,tables,log,file)
-  if version == '1.2':
+  if version == '1.2' or version == '1.3':
     data = parse_block_v1_1(block,version,tables,log)
     did = data['info'][0]['deviceid']
     write_block_v1_0(data,tables,log,file)
