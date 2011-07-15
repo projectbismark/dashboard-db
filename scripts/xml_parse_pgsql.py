@@ -39,7 +39,7 @@ and eventstamp = to_timestamp(%s)"%(table,did,ts)
 def modify_fid(fid,table):
   if fid == 'timestamp':
     return 'eventstamp'
-  if table == 'TRACEROUTE_HOPS':
+  if table == 'traceroute_hops':
     if fid == 'id':
       return 'hop'
     if fid == 'tid':
@@ -247,7 +247,7 @@ def ignore_file(file):
   return False
 
 if __name__ == '__main__':
-  HOME = os.environ['HOME'] #+ '/research/bismark/db/bismark/'
+  HOME = os.environ['HOME'] + '/' #research/bismark/db/bismark/'
   #HOME = '/tmp/bismark_test/'
   MEASURE_FILE_DIR = 'var/data/'
   LOG_DIR = 'var/log/'
@@ -262,8 +262,9 @@ if __name__ == '__main__':
   for file in files:
     if ignore_file(file) == True:
       continue
+    else:
+      filelog.write("%s\n"%(file))
     print file
-    filelog.write("%s\n"%(file))
     fcnt += 1
     parsefile(HOME+MEASURE_FILE_DIR+file,tables,log)
     log.write('Done ' + file + '\n')
