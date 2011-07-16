@@ -18,6 +18,8 @@ def get_fields(line):
   except:
     return None
   line = line.split(skey)[0]
+  line = line.replace("'","")
+  line = line.replace('"','')
   val = line.split()
   return val
 
@@ -76,7 +78,8 @@ def get_tool_info(tool):
   cmd = 'select id from tools where tool = "%s"'%(tool)
   #res = sql.run_sql_cmd(cmd)
   #return int(res[0][0])
-  return 'asdasd'
+  #return 'asdasd'
+  return tool
   
 def form_insert_cmd(table,fids,vals):
   if table.lower() == 'measurements':
@@ -100,7 +103,7 @@ def form_insert_cmd(table,fids,vals):
   cmd = cmd[0:len(cmd)-1]
   cmd += ') SELECT '
   if 'traceroute' not in table:
-    cmd += '1,'
+    cmd += '0,'
   for val in vals:
     ind = vals.index(val)
     nval = modify_val(fids[ind],val)
@@ -218,7 +221,7 @@ def parsefile(file,tables,log):
       if  start_block in line:
         state = 1
         val = get_fields(line)
-        version = val[1].split("=")[1].split('"')[1]
+        version = val[1].split("=")[1]#.split('"')[1]
         print version
       continue
 
