@@ -9,10 +9,10 @@ import random as rnd
 import socket, struct
 import numpy as np
 
-sql_host = "localhost"
-sql_user = "srikanth"
+sql_host = open('pghost_file').readline().split('\n')[0]
+sql_user = open('pguser_file').readline().split('\n')[0]
 sql_passwd = open('pgpasswd_file').readline().split('\n')[0]
-sql_db = "capetown"
+sql_db = open('pgdb_file').readline().split('\n')[0]
 
 def sqlconn():
   try:
@@ -23,8 +23,9 @@ def sqlconn():
     sys.exit()
   return conn
 
-def run_insert_cmd(cmd,prnt=0):
-  conn = sqlconn()
+def run_insert_cmd(cmd,conn=None,prnt=0):
+  if conn == None:
+    conn = sqlconn()
   #print cmd
   try:
     conn.query(cmd)
@@ -34,8 +35,9 @@ def run_insert_cmd(cmd,prnt=0):
   #cursor.fetchall()
   return 1 
 
-def run_data_cmd(cmd,prnt=0):
-  conn = sqlconn()
+def run_data_cmd(cmd,conn=None,prnt=0):
+  if conn == None:
+    conn = sqlconn()
   res = ''
   if prnt == 1:
     print cmd

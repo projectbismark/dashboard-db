@@ -6,6 +6,8 @@ import gzip as gz
 import time
 import pgsql as sql
 
+conn = sql.sqlconn()
+
 def get_fields(line):
   skey = ''
   if '/>' in line:
@@ -34,7 +36,7 @@ def get_id_from_table(table,did,ts):
   cmd = "SELECT id from %s where deviceid = '%s' \
 and eventstamp = to_timestamp(%s)"%(table,did,ts)
   print cmd
-  res = sql.run_data_cmd(cmd)
+  res = sql.run_data_cmd(cmd,conn=conn)
   print res
   return str(res[0][0])
 
@@ -154,7 +156,7 @@ def write_block_v1_0(data,tables,log,file):
         fids,vals = get_measurement_params(fids,vals,data[tab][i])
         cmd = form_insert_cmd(table,fids,vals)
         print cmd
-        res = sql.run_insert_cmd(cmd,prnt=1)
+        res = sql.run_insert_cmd(cmd,conn=conn,prnt=1)
         cnt = 0
         #while ((res == 0) and (cnt < 5)):
           #print "res ", res
@@ -246,6 +248,8 @@ def ignore_file(file):
   if '.xml' not in file:
     return True
   if 'OW' not in file:
+    return True
+  if 'OW_' in file:
     return True
   return False
 
