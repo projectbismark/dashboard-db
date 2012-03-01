@@ -17,6 +17,7 @@ CREATE TABLE measurements_tmpl (
     id id_t,
     toolid toolidref_t references tools(id),
     unique(id),
+	direction varchar(10) default NULL,
     primary key (deviceid, eventstamp, dstip, srcip) -- dst,src maybe not needed
 );
 
