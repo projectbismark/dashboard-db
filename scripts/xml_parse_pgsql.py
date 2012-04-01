@@ -7,6 +7,7 @@ import time
 import pgsql as sql
 
 conn = sql.sqlconn()
+traceroutearr = {}
 
 def get_fields(line):
   skey = ''
@@ -33,12 +34,18 @@ def get_measurement_params(fids,vals,arr):
   return fids,vals
 
 def get_id_from_table(table,did,ts):
-  cmd = "SELECT id from %s where deviceid = '%s' \
+  if did in traceroutearr:
+    if ts in traceroutearr[did]:
+      return traceroutearr[did][ts]
+  if did not in traceroutearr:
+    traceroutearr[did] = {}
+  cmd = "SELECT encode(id,'escape') from %s where deviceid = '%s' \
 and eventstamp = to_timestamp(%s)"%(table,did,ts)
   print cmd
   res = sql.run_data_cmd(cmd,conn=conn)
-  print res
-  return str(res[0][0])
+  #print res,str(res[0][0])
+  traceroutearr[did][ts] = str(res[0][0])
+  return traceroutearr[did][ts]
 
 def modify_fid(fid,table):
   if fid == 'timestamp':
