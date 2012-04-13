@@ -3,7 +3,7 @@
 
 TEMP=capetown.gsql
 
-TABLES="m_aggl3bitrate m_bitrate m_capacity m_jitter m_lmrtt m_pktloss m_rtt m_shaperate m_ulrttdw m_ulrttup m_dnsdelay m_dnsdelayc m_dnsdelaync m_dnsfail m_dnsfailc m_dnsfailnc"
+TABLES="m_aggl3bitrate m_bitrate m_capacity m_jitter m_lmrtt m_pktloss m_rtt m_shaperate m_ulrttdw m_ulrttup m_dnsdelay m_dnsdelayc m_dnsdelaync m_dnsfail m_dnsfailc m_dnsfailnc m_mserver_rtt"
 
 echo "-- Do NOT EDIT. THIS IS A GENERATED FILE." > $TEMP
 echo "-- Premature optimization is the root of all evil." >> $TEMP
