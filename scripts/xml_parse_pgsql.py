@@ -33,19 +33,20 @@ def get_measurement_params(fids,vals,arr):
     vals.append(arr[fid])
   return fids,vals
 
-def get_id_from_table(table,did,ts):
+def get_id_from_table(table,did,srcip,dstip,ts):
+  tup = (srcip,dstip,ts)
   if did in traceroutearr:
-    if ts in traceroutearr[did]:
-      return traceroutearr[did][ts]
+    if tup in traceroutearr[did]:
+      return traceroutearr[did][tup]
   if did not in traceroutearr:
     traceroutearr[did] = {}
   cmd = "SELECT encode(id,'escape') from %s where deviceid = '%s' \
-and eventstamp = to_timestamp(%s)"%(table,did,ts)
+and srcip = '%s' and dstip = '%s' and eventstamp = to_timestamp(%s)"%(table,did,srcip,dstip,ts)
   print cmd
   res = sql.run_data_cmd(cmd,conn=conn)
   #print res,str(res[0][0])
-  traceroutearr[did][ts] = str(res[0][0])
-  return traceroutearr[did][ts]
+  traceroutearr[did][tup] = str(res[0][0])
+  return traceroutearr[did][tup]
 
 def modify_fid(fid,table):
   if fid == 'timestamp':
@@ -156,7 +157,9 @@ def write_block_v1_0(data,tables,log,file):
           data[tab][i].pop('ttid')
           did = data['info'][0]['deviceid'][-12:]
           ts = data['traceroute'][ttid]['timestamp']
-          tid = get_id_from_table(tables['traceroute'],did,ts)
+          srcip = data['traceroute'][ttid]['srcip']
+          dstip = data['traceroute'][ttid]['dstip']
+          tid = get_id_from_table(tables['traceroute'],did,srcip,dstip,ts)
           idtuple = {"tid":tid}
           fids,vals = get_measurement_params(fids,vals,idtuple)
         
