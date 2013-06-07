@@ -7,7 +7,8 @@ CREATE TABLE traceroutes (
     eventstamp eventstamp_t NOT NULL,
     hops integer DEFAULT 0,
     id id_t,
-	direction varchar(10) default NULL,
+    direction varchar(10) default NULL,
+    toolid toolidref_t default NULL,
     primary key(deviceid,eventstamp,dstip,srcip),
     unique(id)
 );
